@@ -7,7 +7,11 @@ const auth = {
             role: ''
         }
     },
-    getters: {},
+    getters: {
+        getToken (state) {
+            return state.token
+        }
+    },
     mutations: {
         setState (state) {
             state
