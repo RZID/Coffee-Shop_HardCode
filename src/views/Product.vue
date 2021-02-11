@@ -48,14 +48,19 @@
                     :key="i"
                     class="col-lg-3 card p-0"
                   >
-                    <img
-                      :src="getImage(element.image)"
-                      :alt="'Image of ' + element.name"
-                    />
-                    <div class="card-body">
-                      <h5 class="card-title">{{ element.name }}</h5>
-                      <p class="card-text">IDR {{ toRupiah(element.price) }}</p>
-                    </div>
+                    <!-- Buat nanti langsung ke detail product -->
+                    <b-link class="text-dark">
+                      <img
+                        :src="getImage(element.image)"
+                        :alt="'Image of ' + element.name"
+                      />
+                      <div class="card-body">
+                        <h5 class="card-title">{{ element.name }}</h5>
+                        <p class="card-text">
+                          IDR {{ toRupiah(element.price) }}
+                        </p>
+                      </div>
+                    </b-link>
                   </div>
                 </div>
               </div>
