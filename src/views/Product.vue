@@ -123,7 +123,6 @@ export default {
 
 <style scoped>
 .row {
-  width: 100%;
   height: 900px;
 }
 .col-lg-4 {

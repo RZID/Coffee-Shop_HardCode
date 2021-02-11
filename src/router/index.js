@@ -5,6 +5,9 @@ import Register from '../views/Register.vue'
 import Homepage from '../views/Homepage.vue'
 import Product from '../views/Product.vue'
 import store from '../store/index'
+import insertProduct from '../views/Insert-product.vue'
+import detailProduct from '../views/Detail-product.vue'
+import updateProduct from '../views/Update-product.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +41,21 @@ const routes = [
       auth: true,
       for: 'logged'
     }
+  },
+  {
+    path: '/new_product',
+    name: 'Insert',
+    component: insertProduct,
+  },
+  {
+    path: '/detail_product/:id',
+    name: 'Detail',
+    component: detailProduct
+  },
+  {
+    path: '/edit_product',
+    name: 'Update',
+    component: updateProduct
   }
 ]
 
