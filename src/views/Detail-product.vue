@@ -109,6 +109,7 @@
 
 <script>
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import Axios from 'axios'
 import currency from '../helper/currency'
 export default {

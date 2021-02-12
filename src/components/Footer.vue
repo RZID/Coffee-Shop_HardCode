@@ -10,10 +10,10 @@
         <div class="list">
           <h5>Team:</h5>
           <ul>
-            <li>Ramadhanu (Project Owner)</li>
-            <li>Rizaldi (Developer)</li>
-            <li>Fadella (Developer)</li>
-            <li>Ferdy (Developer)</li>
+            <li>Ramadhanu (Project Owner || Frontend)</li>
+            <li>Rizaldi (Developer || Frontend)</li>
+            <li>Fadella (Developer || Backend)</li>
+            <li>Ferdy (Developer || Backend)</li>
           </ul>
         </div>
         <div class="d-flex">
@@ -47,15 +47,9 @@
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style scope>
 .footer {
-  background-color: white;
+  background-color: #FFF !important;
   height: 400px;
   padding: 50px 50px 50px 50px;
 }
