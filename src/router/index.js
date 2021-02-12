@@ -8,6 +8,7 @@ import store from '../store/index'
 import insertProduct from '../views/Insert-product.vue'
 import detailProduct from '../views/Detail-product.vue'
 import updateProduct from '../views/Update-product.vue'
+import Cart from '../views/Cart.vue'
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const routes = [
       auth: true,
       for: 'logged'
     }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   }
 ]
 

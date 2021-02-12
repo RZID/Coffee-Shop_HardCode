@@ -241,9 +241,4 @@ export default {
   position: absolute;
   bottom: 0;
 }
-.footer {
-  background: #eeeff2;
-  width: 100%;
-  height: 300px;
-}
 </style>
