@@ -9,6 +9,7 @@ import insertProduct from '../views/Insert-product.vue'
 import detailProduct from '../views/Detail-product.vue'
 import updateProduct from '../views/Update-product.vue'
 import Cart from '../views/Cart.vue'
+import userProfile from '../views/User-profile.vue'
 
 Vue.use(VueRouter)
 
