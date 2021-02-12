@@ -34,11 +34,13 @@
       </div>
       <div class="footer">Coffee Shop</div>
     </div>
+    <Footer />
   </div>
 </template>
 <script>
 import { mapActions } from 'vuex'
 import Alert from '../helper/swal'
+import Footer from '../components/Footer'
 export default {
   mixins: [Alert],
   data: () => {
@@ -54,8 +56,14 @@ export default {
       getLogin: 'auth/login'
     }),
     goLogin () {
-      this.getLogin(this.form).then(() => this.toastSuccess('Login Success')).catch(err => this.toastDanger(err))
+      this.getLogin(this.form).then(() => {
+        this.toastSuccess('Login Success')
+        this.$router.push('/')
+      }).catch(err => this.toastDanger(err))
     }
+  },
+  components: {
+    Footer
   }
 }
 </script>

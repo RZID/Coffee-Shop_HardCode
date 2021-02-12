@@ -40,11 +40,13 @@
       </div>
       <div class="footer">Coffee Shop</div>
     </div>
+    <Footer />
   </div>
 </template>
 <script>
 import Alert from '../helper/swal'
 import { mapActions } from 'vuex'
+import Footer from '../components/Footer'
 export default {
   mixins: [Alert],
   data: () => {
@@ -66,6 +68,9 @@ export default {
         this.toastSuccess('Register Success!')
       }).catch(err => this.toastDanger(err))
     }
+  },
+  components: {
+    Footer
   }
 }
 </script>

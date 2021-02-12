@@ -8,7 +8,7 @@ import store from '../store/index'
 import insertProduct from '../views/Insert-product.vue'
 import detailProduct from '../views/Detail-product.vue'
 import updateProduct from '../views/Update-product.vue'
-import userProfile from '../views/User-profile.vue'
+import Cart from '../views/Cart.vue'
 
 Vue.use(VueRouter)
 
@@ -51,12 +51,26 @@ const routes = [
   {
     path: '/detail_product/:id',
     name: 'Detail',
-    component: detailProduct
+    component: detailProduct,
+    meta: {
+      auth: true,
+      for: 'logged'
+    }
   },
   {
     path: '/edit_product',
     name: 'Update',
-    component: updateProduct
+    component: updateProduct,
+    meta: {
+      auth: true,
+      for: 'logged',
+      restrict: '1'
+    }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   },
   {
     path: '/user_profile',
@@ -75,7 +89,15 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.auth) {
     if (store.getters['auth/getToken']) {
-      next()
+      if (to.meta.restrict) {
+        if (store.getters['auth/userData'].access == 1) {
+          router.push('/').catch(() => { })
+        } else {
+          next()
+        }
+      } else {
+        next()
+      }
     } else {
       router.push('/').catch(() => { })
     }

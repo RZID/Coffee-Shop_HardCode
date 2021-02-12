@@ -12,7 +12,7 @@ const product = {
     actions: {
         setProduct (context) {
             return new Promise((resolve, reject) => {
-                Axios.get(`${process.env.VUE_APP_BACKEND}/products`, {
+                Axios.get(`${process.env.VUE_APP_BACKEND}/api/products`, {
                     headers: {
                         'token': context.getters.getToken
                     }

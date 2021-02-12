@@ -49,9 +49,10 @@
                     class="col-lg-3 card p-0"
                   >
                     <!-- Buat nanti langsung ke detail product -->
-                    <b-link class="text-dark">
+                    <b-link @click="goToDetail(element.id)" class="text-dark">
                       <img
                         :src="getImage(element.image)"
+                        @error="setAltImg"
                         :alt="'Image of ' + element.name"
                       />
                       <div class="card-body">
@@ -69,13 +70,14 @@
         </div>
       </div>
     </div>
-    <div class="footer"></div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
 import currency from '../helper/currency'
+import Footer from '../components/Footer'
 import { mapActions } from 'vuex'
 export default {
   mixins: [currency],
@@ -91,6 +93,12 @@ export default {
     ...mapActions({
       setProduct: 'product/setProduct'
     }),
+    goToDetail (id) {
+      this.$router.push(`/detail_product/${id}`)
+    },
+    setAltImg (event) {
+      event.target.src = "/image/default.jpg"
+    },
     getImage (image) {
       return `${process.env.VUE_APP_BACKEND}/images/${image}`
     },
@@ -99,7 +107,9 @@ export default {
       this.isLoading = true
       this.isError = false
       this.errorMsg = ''
-      this.setProduct().then(res => this.product = res.data.data).catch(err => {
+      this.setProduct().then(res => {
+        this.product = res.data.data
+      }).catch(err => {
         this.isError = true
         this.errorMsg = err.response.data.message
       }).finally(() => {
@@ -116,7 +126,8 @@ export default {
     this.productSet()
   },
   components: {
-    Navbar
+    Navbar,
+    Footer
   }
 }
 </script>
@@ -192,10 +203,5 @@ export default {
   text-align: center;
   position: absolute;
   bottom: 0;
-}
-.footer {
-  background: #eeeff2;
-  width: 100%;
-  height: 300px;
 }
 </style>
