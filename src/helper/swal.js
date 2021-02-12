@@ -2,6 +2,12 @@ import Swal from 'sweetalert2'
 
 const alerting = {
     methods: {
+        alertDanger (message) {
+            Swal.fire({
+                title: 'Oops...',
+                text: message,
+            })
+        },
         toastDanger: (message) => {
             const Toast = Swal.mixin({
                 toast: true,

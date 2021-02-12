@@ -57,13 +57,12 @@ const routes = [
     }
   },
   {
-    path: '/edit_product',
+    path: '/edit_product/:id',
     name: 'Update',
     component: updateProduct,
     meta: {
       auth: true,
-      for: 'logged',
-      restrict: '1'
+      for: 'logged'
     }
   }
 ]
@@ -79,7 +78,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.auth) {
     if (store.getters['auth/getToken']) {
       if (to.meta.restrict) {
-        if (store.getters['auth/userData'].access == 1) {
+        if (store.getters['auth/getUserData']['access'] == 1) {
           router.push('/').catch(() => { })
         } else {
           next()

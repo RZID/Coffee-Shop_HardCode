@@ -26,7 +26,22 @@
           </div>
         </div>
         <div class="col-lg-8 p-0">
-          <div class="navbar"></div>
+          <div class="navbar">
+            <div
+              class="col text-center"
+              v-for="(element, i) in category"
+              :key="i"
+            >
+              <b-link
+                @click="categoryBind(element.id) || productSet()"
+                :class="
+                  categoryProduct == element.id ? 'text-white' : 'text-dark'
+                "
+              >
+                {{ element.name }}
+              </b-link>
+            </div>
+          </div>
           <div class="menu">
             <div class="product">
               <div v-if="isLoading">
@@ -66,6 +81,14 @@
                 </div>
               </div>
             </div>
+            <div
+              class="container"
+              v-if="$store.getters['auth/getUserData'].access == '0'"
+            >
+              <button class="btn btn-primary" @click="toAdd()">
+                Add new product
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -78,21 +101,30 @@
 import Navbar from '../components/Navbar'
 import currency from '../helper/currency'
 import Footer from '../components/Footer'
+import Axios from 'axios'
 import { mapActions } from 'vuex'
 export default {
   mixins: [currency],
   data: () => {
     return {
       product: [],
+      category: [],
       isLoading: false,
       isError: false,
-      errorMsg: ''
+      errorMsg: '',
+      categoryProduct: 1
     }
   },
   methods: {
     ...mapActions({
       setProduct: 'product/setProduct'
     }),
+    categoryBind (id) {
+      this.categoryProduct = id
+    },
+    toAdd () {
+      this.$router.push('/new_product')
+    },
     goToDetail (id) {
       this.$router.push(`/detail_product/${id}`)
     },
@@ -107,7 +139,10 @@ export default {
       this.isLoading = true
       this.isError = false
       this.errorMsg = ''
-      this.setProduct().then(res => {
+      const data = {
+        category: this.categoryProduct
+      }
+      this.setProduct(data).then(res => {
         this.product = res.data.data
       }).catch(err => {
         this.isError = true
@@ -118,12 +153,14 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters({
-    //   getProduct: 'product/getProduct'
-    // })
   },
   mounted () {
     this.productSet()
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then(res => this.category = res.data.data).catch(err => console.error(err))
   },
   components: {
     Navbar,

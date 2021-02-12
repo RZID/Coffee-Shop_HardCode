@@ -5,11 +5,35 @@
       <div class="row p-0">
         <div class="col-lg-5 p-0">
           <div class="picture">
-            <img class="image" src="../assets/TM.png" alt="default-image" />
+            <img class="image" :src="imgUrl" alt="default-image" />
           </div>
           <div class="confirm">
+            <input
+              @input="setImage"
+              type="file"
+              id="selectedFile"
+              style="display: none"
+            />
             <button class="take">Take a picture</button>
-            <button class="choose">Choose from gallery</button>
+            <button
+              class="choose"
+              onclick="document.getElementById('selectedFile').click();"
+            >
+              Choose from gallery
+            </button>
+          </div>
+          <div class="stock">
+            <h4>Category:</h4>
+            <select name="" id="" v-model="form.category">
+              <option selected>Category</option>
+              <option
+                v-for="(element, i) in category"
+                :key="i"
+                :value="element.id"
+              >
+                {{ element.name }}
+              </option>
+            </select>
           </div>
           <div class="delivery">
             <h4>Delivery Hour:</h4>
@@ -22,40 +46,101 @@
           </div>
           <div class="stock">
             <h4>Input stock:</h4>
-            <select name="" id="">
+            <select name="" id="" v-model="form.stock">
               <option value="">Input Stock</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
             </select>
           </div>
         </div>
         <div class="col-lg-7 p-5">
           <div class="form">
             <h4>Name:</h4>
-            <input type="text" placeholder="Type product name" />
+            <input
+              type="text"
+              placeholder="Type product name"
+              v-model="form.name"
+            />
             <h4>Price:</h4>
-            <input type="text" placeholder="Type the price" />
+            <input
+              type="text"
+              placeholder="Type the price"
+              v-model="form.price"
+            />
             <h4>Description:</h4>
-            <input type="text" placeholder="Describe your product" />
+            <input
+              type="text"
+              placeholder="Describe your product"
+              v-model="form.desc"
+            />
             <div class="size-selection">
               <h4>Input product size:</h4>
               <p>Click size you want to use this product</p>
               <div class="size">
-                <button>R</button>
-                <button>L</button>
-                <button>XL</button>
-                <button>250 gr</button>
-                <button>300 gr</button>
-                <button>500 gr</button>
+                <button
+                  @click="size(1)"
+                  :class="form.productSize === 1 ? 'bg-choco' : ''"
+                >
+                  R
+                </button>
+                <button
+                  @click="size(2)"
+                  :class="form.productSize === 2 ? 'bg-choco' : ''"
+                >
+                  L
+                </button>
+                <button
+                  @click="size(3)"
+                  :class="form.productSize === 3 ? 'bg-choco' : ''"
+                >
+                  XL
+                </button>
+                <button
+                  @click="size(4)"
+                  :class="form.productSize === 4 ? 'bg-choco' : ''"
+                >
+                  250 gr
+                </button>
+                <button
+                  @click="size(5)"
+                  :class="form.productSize === 5 ? 'bg-choco' : ''"
+                >
+                  300 gr
+                </button>
+                <button
+                  @click="size(6)"
+                  :class="form.productSize === 6 ? 'bg-choco' : ''"
+                >
+                  500 gr
+                </button>
               </div>
             </div>
             <div class="delivery-selection">
               <h4>Input delivery methods:</h4>
               <p>click methods you want to use for this product</p>
               <div class="delivery">
-                <button>Home Delivery</button>
-                <button>Dine in</button>
-                <button>Take away</button>
+                <button
+                  @click="deliv(1)"
+                  :class="form.deliv === 1 ? 'bg-choco' : ''"
+                >
+                  Home Delivery
+                </button>
+                <button
+                  @click="deliv(2)"
+                  :class="form.deliv === 2 ? 'bg-choco' : ''"
+                >
+                  Dine in
+                </button>
+                <button
+                  @click="deliv(3)"
+                  :class="form.deliv === 3 ? 'bg-choco' : ''"
+                >
+                  Take away
+                </button>
               </div>
-              <button class="save">Save Product</button>
+              <button class="save" @click="save()">Save Product</button>
               <button class="cancel">Cancel</button>
             </div>
           </div>
@@ -69,16 +154,80 @@
 <script>
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Alert from '../helper/swal'
+import Axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
-    components: {
-        Navbar,
-        Footer
+  mixins: [Alert],
+  data: () => {
+    return {
+      category: [],
+      imgUrl: '',
+      form: {
+        image: '',
+        name: '',
+        price: null,
+        desc: '',
+        productSize: '',
+        deliv: '',
+        stock: '',
+        category: ''
+      }
     }
+  },
+  components: {
+    Navbar,
+    Footer
+  },
+  methods: {
+    ...mapActions({
+      insertData: 'product/insertData'
+    }),
+    save () {
+      console.log(this.form)
+      if (!this.form.name || !this.form.price || !this.form.desc || !this.form.productSize || !this.form.deliv) {
+        this.alertDanger('You must fill all of input!')
+      } else {
+        this.insertData(this.form).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.error(err)
+        })
+      }
+    },
+    size (el) {
+      return this.form.productSize = el
+    },
+    deliv (el) {
+      return this.form.deliv = el
+    },
+    setImage (e) {
+      this.form.image = ''
+      const file = e.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+      this.form.image = file
+    }
+  },
+  mounted () {
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then((res) => {
+      this.category = res.data.data
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 }
 </script>
 
 <style scoped>
+.bg-choco {
+  background: chocolate;
+  color: white;
+}
 .row {
   height: 2200px;
 }

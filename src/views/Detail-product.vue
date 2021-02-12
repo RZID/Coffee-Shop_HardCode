@@ -72,7 +72,9 @@
             <h4>IDR {{ toRupiah(dataProduct.price * qty) }}</h4>
           </div>
           <button class="add">Add to cart</button>
-          <button class="edit">Edit product</button>
+          <button class="edit" @click="toEdit(dataProduct.id)">
+            Edit product
+          </button>
         </div>
       </div>
     </div>
@@ -111,12 +113,13 @@
 import Navbar from '../components/Navbar'
 import Axios from 'axios'
 import currency from '../helper/currency'
+import Footer from '../components/Footer'
 export default {
   mixins: [currency],
   data: () => {
     return {
       dataProduct: {},
-      qty: 0,
+      qty: 1,
       now: true
     }
   },
@@ -125,7 +128,7 @@ export default {
       this.now = val
     },
     decrementQty () {
-      if (this.qty > 0) {
+      if (this.qty > 1) {
         this.qty = this.qty - 1
       }
     },
@@ -137,6 +140,9 @@ export default {
     },
     setAltImg (event) {
       event.target.src = "/image/default.jpg"
+    },
+    toEdit (id) {
+      this.$router.push(`/edit_product/${id}`).catch(() => { })
     }
   },
   components: {

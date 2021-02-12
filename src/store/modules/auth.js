@@ -11,6 +11,12 @@ const auth = {
     getters: {
         getToken (state) {
             return state.token
+        },
+        getUserData (state) {
+            return {
+                access: state.access,
+                name: state.name
+            }
         }
     },
     mutations: {
