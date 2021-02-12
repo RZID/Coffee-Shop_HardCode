@@ -10,6 +10,7 @@ import detailProduct from '../views/Detail-product.vue'
 import updateProduct from '../views/Update-product.vue'
 import Cart from '../views/Cart.vue'
 import userProfile from '../views/User-profile.vue'
+import forgotPassword from '../views/Forgot-pass.vue'
 
 Vue.use(VueRouter)
 
@@ -77,6 +78,11 @@ const routes = [
     path: '/user_profile',
     name: 'User Profile',
     component: userProfile
+  },
+  {
+    path: '/forgot_password',
+    name: 'Forgot Password',
+    component: forgotPassword
   }
 ]
 
