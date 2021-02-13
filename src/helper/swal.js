@@ -4,8 +4,28 @@ const alerting = {
     methods: {
         alertDanger (message) {
             Swal.fire({
+                icon: 'error',
+                iconHtml: '<i style="font-size: 50px" class="fas fa-exclamation"></i>',
                 title: 'Oops...',
                 text: message,
+            })
+        },
+        alertQuestion (message) {
+            return new Promise((resolve) => {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: message,
+                    icon: 'warning',
+                    iconHtml: '<i  style="font-size: 50px" class="fas fa-question"></i>',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sure!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        resolve(true)
+                    }
+                })
             })
         },
         toastDanger: (message) => {
@@ -24,6 +44,7 @@ const alerting = {
             })
             Toast.fire({
                 icon: 'error',
+                iconHtml: '<i style="font-size: 20px"  class="fas fa-exclamation"></i>',
                 title: `<span class="text-light">Ooops! ${message}</span>`,
             })
         },
@@ -43,6 +64,7 @@ const alerting = {
             })
             Toast.fire({
                 icon: 'success',
+                iconHtml: '<i style="font-size: 20px" class="far fa-thumbs-up"></i>',
                 title: `<span class="text-light">${message}</span>`,
             })
         }

@@ -12,8 +12,9 @@ const product = {
     actions: {
         setProduct (context, data) {
             let byCategory = data.category ? `searchParams=id_category&search=${data.category}` : `searchParams=id_category&search=1`
+            let pagination = data.page ? `&page=${data.page}` : `page=1`
             return new Promise((resolve, reject) => {
-                Axios.get(`${process.env.VUE_APP_BACKEND}/api/products?${byCategory}`, {
+                Axios.get(`${process.env.VUE_APP_BACKEND}/api/products?${byCategory}${pagination}`, {
                     headers: {
                         'token': context.getters.getToken
                     }
@@ -39,6 +40,30 @@ const product = {
                     }
                 }).then(() => {
                     resolve(true)
+                }).catch(err => {
+                    reject(err.response)
+                })
+            })
+        },
+        updateData (context, data) {
+            let newData = new FormData()
+            newData.append('productName', data.name)
+            newData.append('productSize', data.productSize)
+            newData.append('productCategory', data.category)
+            newData.append('price', data.price)
+            newData.append('description', data.desc)
+            newData.append('stock', data.stock)
+            newData.append('delivery', data.deliv)
+            if (data.image) {
+                newData.append('image', data.image)
+            }
+            return new Promise((resolve, reject) => {
+                Axios.patch(`${process.env.VUE_APP_BACKEND}/api/products/${data.id}`, newData, {
+                    headers: {
+                        'token': context.getters.getToken
+                    }
+                }).then((res) => {
+                    resolve(res)
                 }).catch(err => {
                     reject(err.response)
                 })

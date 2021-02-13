@@ -5,7 +5,8 @@ const auth = {
         return {
             token: localStorage.getItem('token') || null,
             access: localStorage.getItem('access') || null,
-            name: localStorage.getItem('name') || null
+            name: localStorage.getItem('name') || null,
+            uid: localStorage.getItem('uid') || null
         }
     },
     getters: {
@@ -15,13 +16,23 @@ const auth = {
         getUserData (state) {
             return {
                 access: state.access,
-                name: state.name
+                name: state.name,
+                uid: state.uid
             }
         }
     },
     mutations: {
-        setState (state) {
-            state
+        setState (state, payload) {
+            state.token = payload.token
+            state.access = payload.access
+            state.name = payload.name
+            state.uid = payload.uid
+        },
+        deleteState (state) {
+            state.token = ''
+            state.access = ''
+            state.name = ''
+            state.uid = ''
         }
     },
     actions: {
@@ -40,15 +51,31 @@ const auth = {
                     localStorage.setItem('token', res.data.data.token)
                     localStorage.setItem('access', res.data.data.access)
                     localStorage.setItem('name', res.data.data.display_name)
+                    localStorage.setItem('uid', res.data.data.id)
                     commit('setState', {
                         token: res.data.data.token,
                         access: res.data.data.access,
-                        name: res.data.data.display_name
+                        name: res.data.data.display_name,
+                        uid: res.data.data.id
                     })
                     resolve(true)
                 }).catch((err) => {
-                    reject(err.response.data.message)
+                    if (err.response) {
+                        reject(err.response.data.message)
+                    } else {
+                        reject('Something wrong')
+                    }
                 })
+            })
+        },
+        logOut ({ commit }) {
+            return new Promise((resolve) => {
+                localStorage.removeItem('token')
+                localStorage.removeItem('access')
+                localStorage.removeItem('name')
+                localStorage.removeItem('uid')
+                commit('deleteState')
+                resolve(true)
             })
         }
     }

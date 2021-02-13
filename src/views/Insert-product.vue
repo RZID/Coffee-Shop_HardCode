@@ -5,7 +5,12 @@
       <div class="row p-0">
         <div class="col-lg-5 p-0">
           <div class="picture">
-            <img class="image" :src="imgUrl" alt="default-image" />
+            <img
+              class="image"
+              :src="imgUrl"
+              alt="default-image"
+              @error="setAltImg"
+            />
           </div>
           <div class="confirm">
             <input
@@ -35,15 +40,7 @@
               </option>
             </select>
           </div>
-          <div class="delivery">
-            <h4>Delivery Hour:</h4>
-            <select name="" id="">
-              <option value="">Select start hour</option>
-            </select>
-            <select name="" id="">
-              <option value="">Select end hour</option>
-            </select>
-          </div>
+
           <div class="stock">
             <h4>Input stock:</h4>
             <select name="" id="" v-model="form.stock">
@@ -141,7 +138,9 @@
                 </button>
               </div>
               <button class="save" @click="save()">Save Product</button>
-              <button class="cancel">Cancel</button>
+              <button class="cancel" @click="$router.push('/').catch(() => {})">
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -184,15 +183,20 @@ export default {
     ...mapActions({
       insertData: 'product/insertData'
     }),
+    setAltImg (event) {
+      event.target.src = "/image/default.jpg"
+    },
     save () {
-      console.log(this.form)
       if (!this.form.name || !this.form.price || !this.form.desc || !this.form.productSize || !this.form.deliv) {
         this.alertDanger('You must fill all of input!')
       } else {
         this.insertData(this.form).then(res => {
-          console.log(res)
+          if (res) {
+            this.toastSuccess('You\'ve inserted 1 product!')
+            this.$router.push('/').catch(() => { })
+          }
         }).catch(err => {
-          console.error(err)
+          this.toastDanger(err)
         })
       }
     },
@@ -210,6 +214,7 @@ export default {
     }
   },
   mounted () {
+    window.scrollTo(0, 0)
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
       headers: {
         'token': this.$store.getters['auth/getToken']

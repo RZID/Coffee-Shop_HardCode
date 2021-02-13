@@ -63,7 +63,6 @@
                     :key="i"
                     class="col-lg-3 card p-0"
                   >
-                    <!-- Buat nanti langsung ke detail product -->
                     <b-link @click="goToDetail(element.id)" class="text-dark">
                       <img
                         :src="getImage(element.image)"
@@ -71,7 +70,9 @@
                         :alt="'Image of ' + element.name"
                       />
                       <div class="card-body">
-                        <h5 class="card-title">{{ element.name }}</h5>
+                        <h5 class="card-title">
+                          ({{ element.size }}) - {{ element.name }}
+                        </h5>
                         <p class="card-text">
                           IDR {{ toRupiah(element.price) }}
                         </p>
@@ -81,13 +82,28 @@
                 </div>
               </div>
             </div>
-            <div
-              class="container"
-              v-if="$store.getters['auth/getUserData'].access == '0'"
-            >
-              <button class="btn btn-primary" @click="toAdd()">
-                Add new product
-              </button>
+            <div class="d-flex w-100 py-2">
+              <div class="col-3 d-flex">
+                <b-pagination
+                  class="align-self-center m-0"
+                  v-model="currentPage"
+                  :total-rows="pagination.totalData"
+                  :per-page="12"
+                  aria-controls="my-table"
+                  size="sm"
+                  @input="changePage()"
+                ></b-pagination>
+              </div>
+              <div class="col">
+                <div v-if="$store.getters['auth/getUserData'].access == '0'">
+                  <button
+                    class="btn btn-light btn-block btn-lg"
+                    @click="toAdd()"
+                  >
+                    Add new product
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -107,18 +123,23 @@ export default {
   mixins: [currency],
   data: () => {
     return {
+      currentPage: 1,
       product: [],
       category: [],
       isLoading: false,
       isError: false,
       errorMsg: '',
-      categoryProduct: 1
+      categoryProduct: 1,
+      pagination: []
     }
   },
   methods: {
     ...mapActions({
       setProduct: 'product/setProduct'
     }),
+    changePage () {
+      this.productSet(this.currentPage)
+    },
     categoryBind (id) {
       this.categoryProduct = id
     },
@@ -134,16 +155,18 @@ export default {
     getImage (image) {
       return `${process.env.VUE_APP_BACKEND}/images/${image}`
     },
-    productSet () {
+    productSet (page) {
       this.product = []
       this.isLoading = true
       this.isError = false
       this.errorMsg = ''
       const data = {
-        category: this.categoryProduct
+        category: this.categoryProduct,
+        page: page ? page : 1
       }
       this.setProduct(data).then(res => {
         this.product = res.data.data
+        this.pagination = res.data.pagination
       }).catch(err => {
         this.isError = true
         this.errorMsg = err.response.data.message
@@ -155,6 +178,7 @@ export default {
   computed: {
   },
   mounted () {
+    window.scrollTo(0, 0)
     this.productSet()
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
       headers: {
@@ -229,6 +253,7 @@ export default {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
 .col-lg-8 .menu .product .row .col-lg-3 img {
+  object-fit: cover;
   position: absolute;
   width: 150px;
   height: 150px;

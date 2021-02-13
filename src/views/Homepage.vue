@@ -71,10 +71,13 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default {
-    components: {
-        Navbar,
-        Footer
-    }
+  components: {
+    Navbar,
+    Footer
+  },
+  mounted () {
+    window.scrollTo(0, 0)
+  }
 }
 </script>
 

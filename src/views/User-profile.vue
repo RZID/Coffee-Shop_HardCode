@@ -1,262 +1,307 @@
 <template>
-    <div>
-        <Navbar class="sticky-top"/>
-        <div class="background">
-            <div id="user" class="container mt-5">
-                <h2>User Profile</h2>
-                <div class="row">
-                    <div class="col-lg-11">
-                        <div class="row">
-                            <div class="col-lg-5 text-center mt-5">
-                                <img src="../assets/TM.png" alt="">
-                                <div class="information text-center mt-2">
-                                    <h4>Zulaikha</h4>
-                                    <p>zulaikha17@gmail.com</p>
-                                </div>
-                                <div id="select">
-                                    <button class="btn-choose">Choose Photo</button>
-                                    <button class="btn-remove">Remove Photo</button>
-                                </div>
-                                <div class="mt-5">
-                                    <button class="btn-edit">Edit Password</button>
-                                </div>
-                                <div class="changes mt-5">
-                                    Do you want to save the change?
-                                </div>
-                                <div id="save" class="mt-5">
-                                    <button class="btn-save">Save Change</button>
-                                    <button class="btn-cancel">Cancel</button>
-                                </div>
-                                <div class="mt-5">
-                                    <button class="btn-logout">Logout</button>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <h4>Contacts</h4>
-                                <div class="setData row">
-                                    <div class="col-md-8">
-                                        <p>Email address :</p>
-                                        <input type="text">
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>Mobile number :</p>
-                                        <input class="setLine" type="text">
-                                        <hr class="setLine">
-                                    </div>
-                                </div>
-                                <div class="setData row">
-                                    <div class="col-md-8">
-                                        <p>Delivery address :</p>
-                                        <textarea></textarea>
-                                        <hr>
-                                    </div>
-                                </div>
-                                <h4 class="mt-2">Details</h4>
-                                <div class="setData row">
-                                    <div class="col-md-8">
-                                        <p>Display Name :</p>
-                                        <input type="text">
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>DD/MM/YY</p>
-                                        <input class="setLine" type="date">
-                                        <hr class="setLine">
-                                    </div>
-                                </div>
-                                <div class="setData row">
-                                    <div class="col-md-8">
-                                        <p>First Name :</p>
-                                        <input type="text">
-                                        <hr>
-                                    </div>
-                                </div>
-                                <div class="setData row">
-                                    <div class="col-md-8">
-                                        <p>Last Name :</p>
-                                        <input type="text">
-                                        <hr>
-                                    </div>
-                                </div>
-                                <div class="gender text-center mt-5">
-                                    <button></button>Male
-                                    <button></button>Female
-                                </div>
-                                <div class="testt row">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div>
+    <Navbar class="sticky-top" />
+    <div class="background">
+      <div id="user" class="container mt-5">
+        <h2>User Profile</h2>
+        <div class="row">
+          <div class="col-lg-11">
+            <div class="row">
+              <div class="col-lg-5 text-center mt-5">
+                <img alt="" />
+                <div class="information text-center mt-2">
+                  <h4>{{ userData.display_name }}</h4>
+                  <p>{{ userData.email }}</p>
                 </div>
+                <div id="select">
+                  <button class="btn-choose">Choose Photo</button>
+                  <button class="btn-remove">Remove Photo</button>
+                </div>
+                <div class="mt-5">
+                  <button class="btn-edit">Edit Password</button>
+                </div>
+                <div class="changes mt-5">Do you want to save the change?</div>
+                <div id="save" class="mt-5">
+                  <button class="btn-save">Save Change</button>
+                  <button class="btn-cancel">Cancel</button>
+                </div>
+                <div class="mt-5">
+                  <button class="btn-logout">Logout</button>
+                </div>
+              </div>
+              <div class="col-lg-7 position-relative">
+                <h4>Contacts</h4>
+                <div class="setData row">
+                  <div class="col-md-8">
+                    <p>Email address :</p>
+                    <input
+                      class="border-bottom form-control border-dark bg-white"
+                      readonly
+                      type="email"
+                      v-model="userData.email"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <p>Mobile number :</p>
+                    <input
+                      class="setLine border-bottom border-dark form-control"
+                      type="number"
+                      v-model="userData.phone"
+                    />
+                  </div>
+                </div>
+                <div class="setData row py-3">
+                  <div class="col-md-8">
+                    <p>Delivery address :</p>
+                    <textarea
+                      class="border-bottom border-dark w-100"
+                      v-model="userData.address"
+                    ></textarea>
+                  </div>
+                </div>
+                <h4 class="mt-2">Details</h4>
+                <div class="setData row">
+                  <div class="col-md-8">
+                    <p>Display Name :</p>
+                    <input
+                      type="text"
+                      v-model="userData.display_name"
+                      class="border-bottom border-dark form-control"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <p>DD/MM/YY</p>
+                    <input
+                      class="setLine border-bottom border-dark form-control"
+                      type="date"
+                      v-model="userData.birthdate"
+                    />
+                  </div>
+                </div>
+                <div class="setData row py-3">
+                  <div class="col-md-8">
+                    <p>First Name :</p>
+                    <input
+                      type="text"
+                      class="border-bottom form-control border-dark"
+                      v-model="userData.first_name"
+                    />
+                  </div>
+                </div>
+                <div class="setData row">
+                  <div class="col-md-8">
+                    <p>Last Name :</p>
+                    <input
+                      type="text"
+                      class="border-bottom form-control border-dark"
+                      v-model="userData.last_name"
+                    />
+                  </div>
+                </div>
+                <div class="gender text-center mt-5">
+                  <button></button>Male <button></button>Female
+                </div>
+                <div class="position-absolute testt w-100 row"></div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
-
+import Axios from 'axios'
 export default {
-    components: {
-        Navbar
+  data: () => {
+    return {
+      userData: {}
     }
+  },
+  components: {
+    Navbar
+  },
+  mounted () {
+    window.scrollTo(0, 0)
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then((res) => {
+      this.userData = res.data.data[0]
+    }).catch(err => console.error(err))
+  }
 }
 </script>
 
 <style scoped>
-#user h2{
-    font-style: normal;
-    font-weight: 500;
-    font-size: 35px;
-    line-height: 50px;
-    color: #FFFFFF;
-    text-shadow: 0px 6px 8px rgba(255, 255, 255, 0.26);
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.background{
-    background-image: url('../assets/backgroundProfile.png');
-    position: absolute;
-    width: 100%;
-    height: 1500px;
-    background-size: cover;
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
-.col-lg-11{
-    margin-top: 40px;
-    border-radius: 20px;
-    width: 100%;
-    /* height: 1050px; */
-    height: 100%;
-    padding: 20px;
-    background-color: #F8F8F8;
+input:focus {
+  box-shadow: none;
 }
-.col-lg-5 img{
-    width: 200px;
-    height: 200px;
-    border-radius: 200px;
+#user h2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 50px;
+  color: #ffffff;
+  text-shadow: 0px 6px 8px rgba(255, 255, 255, 0.26);
 }
-#select button{
-    margin: 6px;
+.background {
+  background-image: url("../assets/backgroundProfile.png");
+  position: absolute;
+  width: 100%;
+  height: 1500px;
+  background-size: cover;
 }
-.btn-choose{
-    width: 207px;
-    height: 44px;
-    left: 239px;
-    top: 594px;
-    background: #FFBA33;
-    border-radius: 10px;
-    border: none;
-    color: #6A4029;
+.col-lg-11 {
+  margin-top: 40px;
+  border-radius: 20px;
+  width: 100%;
+  /* height: 1050px; */
+  height: 100%;
+  padding: 20px;
+  background-color: #f8f8f8;
 }
-.btn-remove{
-    width: 207px;
-    height: 44px;
-    left: 239px;
-    top: 594px;
-    background: #6A4029;
-    border-radius: 10px;
-    border: none;
-    color: white;
+.col-lg-5 img {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
 }
-.btn-edit{
-    width: 207px;
-    height: 60px;
-    left: 239px;
-    top: 735px;
-    background: #FFFFFF;
-    border: 1px solid #9F9F9F;
-    box-sizing: border-box;
-    border-radius: 20px;
-    color: #6A4029;
+#select button {
+  margin: 6px;
 }
-.changes{
-    font-size: 20px;
-    color: #6A4029;
-    padding: 0px 40px
+.btn-choose {
+  width: 207px;
+  height: 44px;
+  left: 239px;
+  top: 594px;
+  background: #ffba33;
+  border-radius: 10px;
+  border: none;
+  color: #6a4029;
 }
-#save button{
-    margin: 6px;
+.btn-remove {
+  width: 207px;
+  height: 44px;
+  left: 239px;
+  top: 594px;
+  background: #6a4029;
+  border-radius: 10px;
+  border: none;
+  color: white;
 }
-.btn-save{
-    width: 207px;
-    height: 60px;
-    left: 239px;
-    top: 926px;
-    background: #6A4029;
-    border-radius: 20px;
-    border: none;
-    color: white;
+.btn-edit {
+  width: 207px;
+  height: 60px;
+  left: 239px;
+  top: 735px;
+  background: #ffffff;
+  border: 1px solid #9f9f9f;
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: #6a4029;
 }
-.btn-cancel{
-    width: 207px;
-    height: 60px;
-    left: 239px;
-    top: 926px;
-    background: #FFBA33;
-    border-radius: 20px;
-    border: none;
-    color: #6A4029;
+.changes {
+  font-size: 20px;
+  color: #6a4029;
+  padding: 0px 40px;
 }
-.btn-logout{
-    width: 207px;
-    height: 60px;
-    background: #FFFFFF;
-    border: 1px solid #9F9F9F;
-    box-sizing: border-box;
-    border-radius: 20px;
-    color: #6A4029;
+#save button {
+  margin: 6px;
 }
-.col-lg-7{
-    margin: 40px 0px 50px 0px;
-    width: 100%;
-    height: 925px;
-    background-color: white;
-    right: 30px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.22);
-    border-radius: 10px;
+.btn-save {
+  width: 207px;
+  height: 60px;
+  left: 239px;
+  top: 926px;
+  background: #6a4029;
+  border-radius: 20px;
+  border: none;
+  color: white;
 }
-.col-lg-7 h4{
-    font-size: 25px;
-    color: #4F5665;
-    padding: 20px 0px 20px 25px;
+.btn-cancel {
+  width: 207px;
+  height: 60px;
+  left: 239px;
+  top: 926px;
+  background: #ffba33;
+  border-radius: 20px;
+  border: none;
+  color: #6a4029;
 }
-.setData .col-md-8{
-    padding-left: 40px;
+.btn-logout {
+  width: 207px;
+  height: 60px;
+  background: #ffffff;
+  border: 1px solid #9f9f9f;
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: #6a4029;
 }
-.setData p{
-    color: #9F9F9F;
-    font-size: 20px;
+.col-lg-7 {
+  margin: 40px 0px 50px 0px;
+  width: 100%;
+  height: 925px;
+  background-color: white;
+  right: 30px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
 }
-.setData input{
-    outline:0;
-    border: none;
+.col-lg-7 h4 {
+  font-size: 25px;
+  color: #4f5665;
+  padding: 20px 0px 20px 25px;
 }
-.setData textarea{
-    width: 80%;
-    outline:0;
-    border: none;
+.setData .col-md-8 {
+  padding-left: 40px;
 }
-.setData hr{
-    width: 80%;
-    border: 1px solid black;
-    background-color: black;
+.setData p {
+  color: #9f9f9f;
+  font-size: 20px;
 }
-.setLine{
-    width: 90%; 
+.setData input {
+  outline: 0;
+  border: none;
 }
-.testt{
-    margin-top: 60px;
-    width: 605px;
-    height: 12px;
-    background: #6A4029;
-    box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.7);
-    border-radius: 0px 0px 10px 10px;
+.setData textarea {
+  width: 80%;
+  outline: 0;
+  border: none;
 }
-.gender button{
-    border: 4px solid #9F9F9F;
-    box-sizing: border-box;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin: 30px;
+.setData hr {
+  width: 80%;
+  border: 1px solid black;
+  background-color: black;
+}
+.setLine {
+  width: 90%;
+}
+.testt {
+  background: #6a4029;
+  box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.7);
+  border-radius: 0px 0px 10px 10px;
+  bottom: 0;
+  height: 20px;
+}
+.gender button {
+  border: 4px solid #9f9f9f;
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 30px;
 }
 </style>

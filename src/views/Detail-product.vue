@@ -5,39 +5,18 @@
       <div class="row">
         <div class="col-lg-5">
           <img
+            v-if="dataProduct.image"
             :src="getImage(dataProduct.image)"
             @error="setAltImg"
             :alt="'Image of ' + dataProduct.name"
-          /><button class="trash">
+          />
+          <button
+            v-if="$store.getters['auth/getUserData']['access'] == 0"
+            class="trash"
+            @click="deleteProduct()"
+          >
             <b-icon icon="trash"></b-icon>
           </button>
-          <div class="information">
-            <h4>Delivery and Time</h4>
-            <div class="delivery-type">
-              <button>Dine in</button>
-              <button>Door Delivery</button>
-              <button>Pick up</button>
-            </div>
-            <div class="now">
-              <p>Now</p>
-              <button
-                @click="setNow(true)"
-                :class="now ? 'bg-choco text-white' : ''"
-              >
-                Yes
-              </button>
-              <button
-                @click="setNow(false)"
-                :class="!now ? 'bg-choco text-white' : ''"
-              >
-                No
-              </button>
-            </div>
-            <div class="time" v-if="!now">
-              <p>Set time</p>
-              <input type="text" placeholder="Enter time for reservation" />
-            </div>
-          </div>
         </div>
         <div class="col-lg-7">
           <h1 class="text-capitalize">{{ dataProduct.name }}</h1>
@@ -71,7 +50,14 @@
             </div>
             <h4>IDR {{ toRupiah(dataProduct.price * qty) }}</h4>
           </div>
-          <button class="add">Add to cart</button>
+          <button class="add" @click="addToCart()">
+            {{
+              this.getCart.filter((el) => el.id == this.$route.params.id)
+                .length > 0
+                ? "Update Quantity"
+                : "Add to cart"
+            }}
+          </button>
           <button class="edit" @click="toEdit(dataProduct.id)">
             Edit product
           </button>
@@ -79,28 +65,19 @@
       </div>
     </div>
     <div class="container sec-con">
-      <div class="row p-0">
-        <div class="col-lg-3">
-          <h3>Choose a size</h3>
-          <div class="size">
-            <button>R</button>
-            <button>L</button>
-            <button>XL</button>
-          </div>
-        </div>
-        <div class="col-lg-8">
+      <div class="pb-3">
+        <div class="thisCheckout px-4">
           <img src="../assets/TM.png" alt="" />
-          <div class="more-information">
-            <h3>{{ dataProduct.name }}</h3>
-            <div class="items">
-              <p>x1 (Large)</p>
-              <p>x1 (Regular)</p>
-              <p>x1 (Extra Large)</p>
-            </div>
+          <div class="more-information d-flex m-0">
+            <span class="align-self-center">
+              <h3 class="m-0">{{ dataProduct.name }}</h3>
+            </span>
           </div>
           <div class="co">
             <h3>Checkout</h3>
-            <button><b-icon icon="arrow-right" font-scale="3"></b-icon></button>
+            <button @click="$router.push('/cart')">
+              <b-icon icon="arrow-right" font-scale="3"></b-icon>
+            </button>
           </div>
         </div>
       </div>
@@ -111,12 +88,28 @@
 
 <script>
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import Axios from 'axios'
 import currency from '../helper/currency'
+import Alert from '../helper/swal'
 import Footer from '../components/Footer'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  mixins: [currency],
+  computed: {
+    ...mapGetters({
+      getCart: 'cart/getCart'
+    })
+  },
+  mounted () {
+    if (this.getCart.filter(el => el.id == this.$route.params.id).length > 0) {
+      this.qty = this.getCart.filter(el => el.id == this.$route.params.id)[0].qty
+    }
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then((res) => this.dataProduct = res.data.data[0]).catch(err => console.error(err))
+  },
+  mixins: [currency, Alert],
   data: () => {
     return {
       dataProduct: {},
@@ -125,8 +118,23 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      sendCart: 'cart/addToCart'
+    }),
     setNow (val) {
       this.now = val
+    },
+    addToCart () {
+      const data = {
+        id: this.dataProduct.id,
+        name: this.dataProduct.name,
+        qty: this.qty,
+        image: this.dataProduct.image,
+        price: this.dataProduct.price,
+        size: this.dataProduct.size
+      }
+      this.sendCart(data)
+      this.toastSuccess('Sent to cart')
     },
     decrementQty () {
       if (this.qty > 1) {
@@ -144,18 +152,27 @@ export default {
     },
     toEdit (id) {
       this.$router.push(`/edit_product/${id}`).catch(() => { })
+    },
+    deleteProduct () {
+      this.alertQuestion('Delete this product?').then(() => {
+        Axios.delete(`${process.env.VUE_APP_BACKEND}/api/products/${this.dataProduct.id}`, {
+          headers: {
+            'token': this.$store.getters['auth/getToken']
+          }
+        }).then((res) => {
+          if (res) {
+            this.toastSuccess('Success delete this product')
+            this.$router.push('/').catch(() => { })
+          }
+        }).catch(err => {
+          this.toastDanger(err.response.statusText)
+        })
+      })
     }
   },
   components: {
     Navbar,
     Footer
-  },
-  mounted () {
-    Axios.get(`${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`, {
-      headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then((res) => this.dataProduct = res.data.data[0]).catch(err => console.error(err))
   }
 }
 
@@ -177,6 +194,7 @@ export default {
   background: chocolate;
 }
 .col-lg-5 img {
+  object-fit: cover;
   width: 300px;
   height: 300px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
@@ -299,7 +317,7 @@ export default {
   border: none;
   border-radius: 30px;
 }
-.sec-con .col-lg-8 {
+.sec-con .thisCheckout {
   height: 150px;
   display: flex;
   transform: translateY(50%);
@@ -308,33 +326,33 @@ export default {
   border-radius: 15px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
-.sec-con .col-lg-8 img {
+.sec-con .thisCheckout img {
   width: 120px;
   height: 120px;
   margin-top: 15px;
   border-radius: 60px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
-.sec-con .col-lg-8 .more-information {
+.sec-con .thisCheckout .more-information {
   display: inline-block;
   margin-top: 20px;
   margin-left: 20px;
 }
-.sec-con .col-lg-8 .more-information .items {
+.sec-con .thisCheckout .more-information .items {
   width: 100%;
   height: 80px;
   overflow: auto;
 }
-.sec-con .col-lg-8 .co {
+.sec-con .thisCheckout .co {
   display: flex;
   position: absolute;
   right: 30px;
 }
-.sec-con .col-lg-8 .co h3 {
+.sec-con .thisCheckout .co h3 {
   transform: translateY(140%);
   margin-right: 50px;
 }
-.sec-con .col-lg-8 .co button {
+.sec-con .thisCheckout .co button {
   height: 50px;
   width: 50px;
   border: none;

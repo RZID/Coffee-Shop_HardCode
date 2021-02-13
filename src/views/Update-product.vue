@@ -4,11 +4,23 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-lg-5">
+          <img v-if="imgUrl" :src="imgUrl" alt="" />
           <img
-            @error="setDefaultImage"
+            v-else
             :src="getImage(dataProduct.image)"
+            @error="setDefaultImage"
             alt=""
-          /><button class="trash">
+          />
+          <input
+            type="file"
+            id="selectedFile"
+            style="display: none"
+            @input="changeImg"
+          />
+          <button
+            class="trash"
+            onclick="document.getElementById('selectedFile').click();"
+          >
             <b-icon icon="trash"></b-icon>
           </button>
           <div class="info">
@@ -16,45 +28,47 @@
           </div>
         </div>
         <div class="col-lg-7">
-          <h3>{{ dataProduct.name }}</h3>
+          <input
+            type="text"
+            v-model="dataProduct.name"
+            class="border-0 p-0 form-control form-control-lg"
+          />
           <hr />
-          <h5>IDR {{ toRupiah(dataProduct.price) }}</h5>
+          <div class="form-inline form-control-lg p-0">
+            <div class="form-group mr-2">IDR</div>
+            <div class="form-group">
+              <input
+                type="number"
+                class="border-0 p-0 form-control form-control-lg"
+                v-model="dataProduct.price"
+              />
+            </div>
+          </div>
           <hr />
           <div class="info-product">
-            <p>
-              {{ dataProduct.description }}
-            </p>
+            <textarea
+              class="border-0 p-0 form-control form-control-sm"
+              v-model="dataProduct.description"
+            />
           </div>
           <hr />
-          <select name="" id="">
-            <option value="">Select Size</option>
+          <select name="" id="" v-model="dataProduct.productSize">
+            <option v-for="(element, i) in size" :key="i" :value="element.id">
+              {{ element.size }}
+            </option>
           </select>
-          <select name="" id="">
-            <option value="">Select Delivery Methods</option>
+          <select name="" id="" v-model="dataProduct.productDelivery">
+            <option
+              v-for="(element, i) in delivery"
+              :key="i"
+              :value="element.id"
+            >
+              {{ element.name }}
+            </option>
           </select>
           <div class="confirm">
-            <div class="auto-text">
-              <button
-                style="
-                  border-top-left-radius: 10px;
-                  border-bottom-left-radius: 10px;
-                "
-              >
-                +
-              </button>
-              <p>0</p>
-              <button
-                style="
-                  border-top-right-radius: 10px;
-                  border-bottom-right-radius: 10px;
-                "
-              >
-                -
-              </button>
-            </div>
-            <button class="add">Add to cart</button>
+            <button class="save" @click="update()">Save change</button>
           </div>
-          <button class="save">Save change</button>
         </div>
       </div>
     </div>
@@ -67,11 +81,17 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Axios from 'axios'
 import currency from '../helper/currency'
+import Alert from '../helper/swal'
+import { mapActions } from 'vuex'
 export default {
-  mixins: [currency],
+  mixins: [Alert, currency],
   data: () => {
     return {
-      dataProduct: {}
+      dataProduct: {},
+      size: [],
+      delivery: [],
+      image: '',
+      imgUrl: ''
     }
   },
   components: {
@@ -79,14 +99,43 @@ export default {
     Footer
   },
   methods: {
+    ...mapActions({
+      updateData: 'product/updateData'
+    }),
+    update () {
+      const data = {
+        id: this.dataProduct.id,
+        name: this.dataProduct.name,
+        productSize: this.dataProduct.productSize,
+        category: this.dataProduct.productCategory,
+        price: this.dataProduct.price,
+        desc: this.dataProduct.description,
+        stock: this.dataProduct.stock,
+        deliv: this.dataProduct.productDelivery,
+        image: this.image ? this.image : false
+      }
+      this.updateData(data).then((res) => {
+        if (res) {
+          this.toastSuccess('Success update product!')
+        }
+      }).catch(err =>
+        this.dangerSuccess(err.response.message))
+    },
     getImage (image) {
-      return `${process.env.VUE_APP_BACKEND}/image/${image}`
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`
     },
     setDefaultImage (e) {
       e.target.src = "/image/default.jpg"
+    },
+    changeImg (e) {
+      this.image = ''
+      const file = e.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+      this.image = file
     }
   },
   mounted () {
+    window.scrollTo(0, 0)
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`, {
       headers: {
         'token': this.$store.getters['auth/getToken']
@@ -96,12 +145,52 @@ export default {
     }).catch(err => {
       console.error(err)
     })
+
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/productsize/`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then((res) => {
+      this.size = res.data.data
+    }).catch(err => {
+      console.error(err)
+    })
+
+    Axios.get(`${process.env.VUE_APP_BACKEND}/api/delivery/`, {
+      headers: {
+        'token': this.$store.getters['auth/getToken']
+      }
+    }).then((res) => {
+      this.delivery = res.data.data
+    }).catch(err => {
+      console.error(err)
+    })
   }
 }
 </script>
 
 <style scoped>
+textarea.form-control {
+  resize: none;
+  height: 100%;
+}
+input:focus,
+textarea:focus {
+  box-shadow: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 .col-lg-5 img {
+  object-fit: cover;
   width: 400px;
   height: 500px;
 }
