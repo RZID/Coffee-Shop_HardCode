@@ -246,21 +246,8 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .col-lg-4{
   border-right: 1px solid #5E5E5E;
-=======
-.image-cover {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.row {
-  height: 900px;
-}
-.col-lg-4 {
-  border-right: 1px solid #000;
->>>>>>> 429cd92711411e74841ed2aefd0221900524203a
 }
 .col-lg-4 .head {
   text-align: center;
