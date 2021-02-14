@@ -65,7 +65,7 @@ export default {
     }),
     signUp () {
       this.sendRegister(this.form).then(() => {
-        this.toastSuccess('Register Success!')
+        this.toastSuccess('Register Success! <p><small>Check your email for verification</small></p>')
       }).catch(err => this.toastDanger(err))
     }
   },

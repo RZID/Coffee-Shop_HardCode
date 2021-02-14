@@ -13,9 +13,11 @@
           <router-link to="/cart" class="navigation-content"
             >Your Cart</router-link
           >
-          <router-link to="" class="navigation-content">History</router-link>
+          <router-link to="/history" class="navigation-content"
+            >History</router-link
+          >
         </div>
-        <form class="d-flex" v-if="getToken">
+        <form class="d-flex" v-if="getToken" @submit.prevent="">
           <div class="row">
             <div class="col-8">
               <div class="input-group bg-gray">

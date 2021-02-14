@@ -58,7 +58,11 @@
                 : "Add to cart"
             }}
           </button>
-          <button class="edit" @click="toEdit(dataProduct.id)">
+          <button
+            class="edit"
+            v-if="$store.getters['auth/getUserData'].access != '1'"
+            @click="toEdit(dataProduct.id)"
+          >
             Edit product
           </button>
         </div>

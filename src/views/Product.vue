@@ -113,9 +113,13 @@
                   >
                     <b-link @click="goToDetail(element.id)" class="text-dark">
                       <img
-                        :src="getImage(element.image)"
-                        @error="setAltImg"
-                        :alt="'Image of ' + element.name"
+                        :style="
+                          'background-image:url(' +
+                          getImage(element.image) +
+                          ')' +
+                          ',url(/image/default.jpg)'
+                        "
+                        class="image-cover"
                       />
                       <div class="card-body">
                         <h5 class="card-title">
@@ -242,8 +246,21 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .col-lg-4{
   border-right: 1px solid #5E5E5E;
+=======
+.image-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.row {
+  height: 900px;
+}
+.col-lg-4 {
+  border-right: 1px solid #000;
+>>>>>>> 429cd92711411e74841ed2aefd0221900524203a
 }
 .col-lg-4 .head {
   text-align: center;

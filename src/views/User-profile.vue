@@ -8,22 +8,53 @@
           <div class="col-lg-11">
             <div class="row">
               <div class="col-lg-5 text-center mt-5">
-                <img alt="" />
+                <img
+                  class="cover"
+                  :style="
+                    'background-image:url(' +
+                    imgUrl +
+                    '),url(' +
+                    getImage(userData.image) +
+                    '), url(' +
+                    getImage('default_photo.png') +
+                    ')'
+                  "
+                />
                 <div class="information text-center mt-2">
                   <h4>{{ userData.display_name }}</h4>
                   <p>{{ userData.email }}</p>
                 </div>
                 <div id="select">
-                  <button class="btn-choose">Choose Photo</button>
-                  <button class="btn-remove">Remove Photo</button>
+                  <input
+                    @input="setImage"
+                    id="fileImage"
+                    type="file"
+                    hidden
+                    accept="image/x-png,image/gif,image/jpeg"
+                  />
+                  <button
+                    class="btn-choose"
+                    onclick="document.getElementById('fileImage').click();"
+                  >
+                    Choose Photo
+                  </button>
+                  <button
+                    class="btn-remove"
+                    v-if="userData.image != 'default_photo.png'"
+                    @click="removePhoto()"
+                  >
+                    Remove Photo
+                  </button>
                 </div>
                 <div class="mt-5">
                   <button class="btn-edit">Edit Password</button>
                 </div>
                 <div class="changes mt-5">Do you want to save the change?</div>
                 <div id="save" class="mt-5">
-                  <button class="btn-save">Save Change</button>
-                  <button class="btn-cancel">Cancel</button>
+                  <button class="btn-save" @click="save()">Save Change</button>
+                  <button class="btn-cancel" @click="setUserData()">
+                    Cancel
+                  </button>
                 </div>
                 <div class="mt-5">
                   <button class="btn-logout">Logout</button>
@@ -70,7 +101,7 @@
                     />
                   </div>
                   <div class="col-md-4">
-                    <p>DD/MM/YY</p>
+                    <p>Birthdate</p>
                     <input
                       class="setLine border-bottom border-dark form-control"
                       type="date"
@@ -99,7 +130,16 @@
                   </div>
                 </div>
                 <div class="gender text-center mt-5">
-                  <button></button>Male <button></button>Female
+                  <button
+                    :class="userData.gender == 0 ? 'active' : ''"
+                    @click="setGender('0')"
+                  ></button
+                  >Male
+                  <button
+                    @click="setGender('1')"
+                    :class="userData.gender == 1 ? 'active' : ''"
+                  ></button
+                  >Female
                 </div>
                 <div class="position-absolute testt w-100 row"></div>
               </div>
@@ -114,29 +154,103 @@
 <script>
 import Navbar from '../components/Navbar'
 import Axios from 'axios'
+import Alert from '../helper/swal'
 export default {
+  mixins: [Alert],
   data: () => {
     return {
-      userData: {}
+      userData: {},
+      imgUrl: '',
+      image: ''
     }
   },
   components: {
     Navbar
   },
+  methods: {
+    save () {
+      console.log(this.userData)
+      let data = new FormData()
+      this.userData.phone ? data.append('phone', this.userData.phone) : ''
+      this.userData.gender ? data.append('gender', this.userData.gender) : ''
+      this.userData.birthdate ? data.append('birthdate', this.userData.birthdate) : ''
+      this.userData.display_name ? data.append('display_name', this.userData.display_name) : ''
+      this.userData.first_name ? data.append('first_name', this.userData.first_name) : ''
+      this.userData.last_name ? data.append('last_name', this.userData.last_name) : ''
+      this.userData.address ? data.append('address', this.userData.address) : ''
+      if (this.image) {
+        data.append('image', this.image)
+      }
+      Axios.patch(`${process.env.VUE_APP_BACKEND}/api/user/${this.userData.id}`, data, {
+        headers: {
+          'token': this.$store.getters['auth/getToken']
+        }
+      }).then(() => {
+        this.setUserData()
+        this.toastSuccess('Your profile was updated!')
+      }).catch((err) => {
+        this.toastDanger(err.response.message)
+      })
+    },
+    setGender (code) {
+      this.userData.gender = code
+    },
+    getImage (image) {
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`
+    },
+    removePhoto () {
+      this.alertQuestion('Want to delete photo ?').then(() => {
+        this.imgUrl = ''
+        this.image = ''
+        Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/delete_photo/${this.userData.id}`, {
+          headers: {
+            'token': this.$store.getters['auth/getToken']
+          }
+        }).then(() => {
+          this.setUserData()
+          this.toastSuccess('Your profile was updated!')
+        }).catch((err) => {
+          console.error(err)
+        })
+      })
+    },
+    setImage (e) {
+      this.image = ''
+      const file = e.target.files[0]
+      this.imgUrl = URL.createObjectURL(file)
+      this.image = file
+    },
+    setUserData () {
+      Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
+        headers: {
+          'token': this.$store.getters['auth/getToken']
+        }
+      }).then((res) => {
+        this.userData = res.data.data[0]
+      }).catch(err => console.error(err))
+    }
+  },
   mounted () {
     window.scrollTo(0, 0)
-    Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
-      headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then((res) => {
-      this.userData = res.data.data[0]
-    }).catch(err => console.error(err))
+    this.setUserData()
   }
 }
 </script>
 
 <style scoped>
+input::-webkit-inner-spin-button,
+input::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+.active {
+  background-color: #ffba33;
+}
+.cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
