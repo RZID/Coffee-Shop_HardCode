@@ -65,9 +65,13 @@
                   >
                     <b-link @click="goToDetail(element.id)" class="text-dark">
                       <img
-                        :src="getImage(element.image)"
-                        @error="setAltImg"
-                        :alt="'Image of ' + element.name"
+                        :style="
+                          'background-image:url(' +
+                          getImage(element.image) +
+                          ')' +
+                          ',url(/image/default.jpg)'
+                        "
+                        class="image-cover"
                       />
                       <div class="card-body">
                         <h5 class="card-title">
@@ -194,6 +198,11 @@ export default {
 </script>
 
 <style scoped>
+.image-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .row {
   height: 900px;
 }

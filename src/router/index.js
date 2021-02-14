@@ -11,6 +11,8 @@ import updateProduct from '../views/Update-product.vue'
 import Cart from '../views/Cart.vue'
 import userProfile from '../views/User-profile.vue'
 import forgotPassword from '../views/Forgot-pass.vue'
+import verif from '../views/Verify.vue'
+import History from '../views/History.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +51,11 @@ const routes = [
     path: '/new_product',
     name: 'Insert',
     component: insertProduct,
+    meta: {
+      auth: true,
+      for: 'logged',
+      restrict: true
+    }
   },
   {
     path: '/detail_product/:id',
@@ -65,23 +72,52 @@ const routes = [
     component: updateProduct,
     meta: {
       auth: true,
-      for: 'logged'
+      for: 'logged',
+      restrict: true
     }
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      auth: true,
+      for: 'logged'
+    }
   },
   {
     path: '/user_profile',
     name: 'User Profile',
-    component: userProfile
+    component: userProfile,
+    meta: {
+      auth: true,
+      for: 'logged'
+    }
   },
   {
     path: '/forgot_password',
     name: 'Forgot Password',
-    component: forgotPassword
+    component: forgotPassword,
+    meta: {
+      for: 'unlog'
+    }
+  },
+  {
+    path: '/verify/:token',
+    name: 'Verify',
+    component: verif,
+    meta: {
+      for: 'unlog'
+    }
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History,
+    meta: {
+      auth: true,
+      for: 'logged'
+    }
   }
 ]
 

@@ -269,7 +269,10 @@ export default {
             payment: detail.payment
           }
         })
-        this.addHistory(data).then(res => console.log(res)).catch(err => console.error(err))
+        this.addHistory(data).then(() => {
+          this.removeCart()
+          this.toastSuccess('OK!, Your order will be process!')
+        }).catch(err => console.error(err))
       }
     },
     getImage (img) {
