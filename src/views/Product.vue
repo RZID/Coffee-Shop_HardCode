@@ -11,10 +11,58 @@
             <p>Check them out!</p>
           </div>
           <div class="content-coupons">
-            <div class="btn coupons"></div>
-            <div class="btn coupons"></div>
-            <div class="btn coupons"></div>
-            <div class="btn coupons"></div>
+            <div class="btn coupons" style="background:#88B788">
+                <div class="row">
+                  <div class="col-lg-3">
+                  <img src="../assets/image 46.png" alt="">
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="context">
+                      <h4>HAPPY MOTHER'S DAY!</h4>
+                      <p>Get one of our favorite menu for free!</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="btn coupons" style="background:#F5C361">
+              <div class="row">
+                  <div class="col-lg-3">
+                  <img src="../assets/image 43.png" alt="">
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="context">
+                      <h4>Get a cup of coffee for free on sunday morning</h4>
+                      <p>Only at 7 to 9 AM</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="btn coupons" style="background:#88B788">
+              <div class="row">
+                  <div class="col-lg-3">
+                  <img src="../assets/image 46.png" alt="">
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="context">
+                      <h4>HAPPY MOTHER'S DAY!</h4>
+                      <p>Get one of our favorite menu for free!</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="btn coupons" style="background:#C59378">
+              <div class="row">
+                  <div class="col-lg-3">
+                  <img src="../assets/image 45.png" alt="">
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="context">
+                      <h4>HAPPY HALLOWEN!</h4>
+                      <p>Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
           </div>
           <button class="btn apply">Apply Coupons</button>
           <div class="information">
@@ -52,7 +100,7 @@
                   <h5>Please wait...</h5>
                 </div>
               </div>
-              <div v-else-if="isError" class="text-white text-center">
+              <div v-else-if="isError" class="text-black text-center">
                 <h4>Oops...</h4>
                 <p class="text-light">{{ errorMsg }}</p>
               </div>
@@ -194,11 +242,8 @@ export default {
 </script>
 
 <style scoped>
-.row {
-  height: 900px;
-}
-.col-lg-4 {
-  border-right: 1px solid #000;
+.col-lg-4{
+  border-right: 1px solid #5E5E5E;
 }
 .col-lg-4 .head {
   text-align: center;
@@ -208,8 +253,7 @@ export default {
 }
 .col-lg-4 .content-coupons .coupons {
   width: 100%;
-  height: 100px;
-  background: pink;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
   border-radius: 25px 25px 25px 25px;
   margin-top: 10px;
 }
@@ -230,12 +274,10 @@ export default {
   height: 800px;
 }
 .col-lg-8 .navbar {
-  background: pink;
   width: 100%;
   height: 70px;
 }
 .col-lg-8 .menu .product {
-  background: gray;
   width: 100%;
   height: 830px;
   padding: 40px;
