@@ -228,8 +228,8 @@ export default {
 
 <style scoped>
 .bg-choco {
-  background: chocolate;
-  color: white;
+  background: #FFBA33;
+  color: #6A4029;
 }
 .row {
   height: 2200px;
@@ -291,8 +291,13 @@ export default {
 }
 .col-lg-5 .stock select {
   margin-top: 20px;
+  padding: 10px;
   width: 80%;
-  height: 60px;
+  height: 75px;
+  background: #FFFFFF;
+  border: 1px solid #9F9F9F;
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 .col-lg-7 {
   position: relative;
@@ -302,9 +307,14 @@ export default {
   line-height: 1.2;
 }
 .col-lg-7 .form input {
+  padding: 20px;
   width: 80%;
   height: 50px;
   margin-bottom: 20px;
+  background: #FFFFFF;
+  border: 1px solid #9F9F9F;
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 .col-lg-7 .form .size-selection {
   margin-top: 40px;
@@ -332,17 +342,23 @@ export default {
 .col-lg-7 .form .save {
   margin-top: 20px;
   width: 100%;
-  height: 80px;
+  height: 70px;
   border: none;
-  border-radius: 15px 15px;
+  border-radius: 20px;
   margin-right: 20px;
+  background: #6A4029;
+  color: white;
+  box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.4);
+  font-size: 18px;
 }
 .col-lg-7 .form .cancel {
   margin-top: 20px;
   width: 100%;
-  height: 80px;
+  height: 70px;
   border: none;
-  border-radius: 15px 15px;
   margin-right: 20px;
+  background: rgba(186, 186, 186, 0.35);
+  border-radius: 20px;
+  font-size: 18px;
 }
 </style>

@@ -401,8 +401,9 @@ textarea:focus {
   width: 100%;
   height: 50px;
   border: none;
-  border-radius: 15px;
   color: white;
-  background: chocolate;
+  background: #6A4029;
+  box-shadow: 0px 10px 20px rgba(137, 85, 55, 0.4);
+  border-radius: 15px;
 }
 </style>

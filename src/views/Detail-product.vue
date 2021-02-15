@@ -265,10 +265,13 @@ export default {
 }
 .col-lg-7 .price .auto-text {
   display: flex;
-  border: 1px solid black;
   width: 120px;
   height: 50px;
-  border-radius: 10px 10px;
+  border: 1px solid #9F9F9F;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #6A4029;
+  font-size: 20px;
 }
 .col-lg-7 .price .auto-text p {
   width: 80px;
@@ -280,6 +283,7 @@ export default {
 .col-lg-7 .price .auto-text button {
   border: none;
   width: 70px;
+  color: #6A4029;
 }
 .col-lg-7 .price h4 {
   position: absolute;
@@ -287,19 +291,24 @@ export default {
   margin-top: 10px;
 }
 .col-lg-7 .add {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 100%;
-  height: 50px;
+  height: 70px;
   border: none;
-  border-radius: 10px 10px;
+  background: #6A4029;
+  border-radius: 20px;
+  color: white;
+  font-size: 20px;
 }
 .col-lg-7 .edit {
   margin-top: 20px;
   width: 100%;
-  margin-bottom: 20px;
-  height: 50px;
+  height: 70px;
   border: none;
-  border-radius: 10px 10px;
+  background: #FFBA33;
+  border-radius: 20px;
+  color: #6A4029;
+  font-size: 20px;
 }
 .sec-con .col-lg-3 {
   margin-right: 70px;

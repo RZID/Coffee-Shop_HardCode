@@ -3,7 +3,7 @@
     <Navbar class="sticky-top" />
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 text-center">
           <div class="head mb-5">
             <br />
             <h4 class="mt-1">Promo Today</h4>
@@ -68,7 +68,7 @@
             </div>
           </div>
           <button class="btn apply">Apply Coupons</button>
-          <div class="information">
+          <div class="information text-justify">
             <p>Terms and Condition</p>
             <p>1. You can only apply 1 coupon per day</p>
             <p>2. It only for dine in</p>
@@ -152,7 +152,7 @@
               <div class="col">
                 <div v-if="$store.getters['auth/getUserData'].access == '0'">
                   <button
-                    class="btn btn-light btn-block btn-lg"
+                    class="btn btn-light btn-block btn-lg btnAdd"
                     @click="toAdd()"
                   >
                     Add new product
@@ -271,10 +271,10 @@ export default {
 }
 .col-lg-4 .apply {
   margin-top: 70px;
-  width: 100%;
-  height: 50px;
-  border-radius: 25px 25px 25px 25px;
-  background: chocolate;
+  width: 335px;
+  height: 64px;
+  background: #6A4029;
+  border-radius: 20px;
   color: #ffffff;
 }
 .col-lg-4 .information {
@@ -319,5 +319,12 @@ export default {
   text-align: center;
   position: absolute;
   bottom: 0;
+}
+.btnAdd{
+  width: 100%;
+  height: 70px;
+  background: #6A4029;
+  border-radius: 20px;
+  color: white;
 }
 </style>
