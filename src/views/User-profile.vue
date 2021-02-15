@@ -60,7 +60,7 @@
                   <button class="btn-logout">Logout</button>
                 </div>
               </div>
-              <div class="col-lg-7 position-relative">
+              <div class="col-lg-7">
                 <h4>Contacts</h4>
                 <div class="setData row">
                   <div class="col-md-8">

@@ -11,57 +11,60 @@
             <p>Check them out!</p>
           </div>
           <div class="content-coupons">
-            <div class="btn coupons" style="background:#88B788">
-                <div class="row">
-                  <div class="col-lg-3">
-                  <img src="../assets/image 46.png" alt="">
-                  </div>
-                  <div class="col-lg-9">
-                    <div class="context">
-                      <h4>HAPPY MOTHER'S DAY!</h4>
-                      <p>Get one of our favorite menu for free!</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="btn coupons" style="background:#F5C361">
+            <div class="btn coupons" style="background: #88b788">
               <div class="row">
-                  <div class="col-lg-3">
-                  <img src="../assets/image 43.png" alt="">
-                  </div>
-                  <div class="col-lg-9">
-                    <div class="context">
-                      <h4>Get a cup of coffee for free on sunday morning</h4>
-                      <p>Only at 7 to 9 AM</p>
-                    </div>
+                <div class="col-lg-3">
+                  <img src="../assets/image 46.png" alt="" />
+                </div>
+                <div class="col-lg-9">
+                  <div class="context">
+                    <h4>HAPPY MOTHER'S DAY!</h4>
+                    <p>Get one of our favorite menu for free!</p>
                   </div>
                 </div>
+              </div>
             </div>
-            <div class="btn coupons" style="background:#88B788">
+            <div class="btn coupons" style="background: #f5c361">
               <div class="row">
-                  <div class="col-lg-3">
-                  <img src="../assets/image 46.png" alt="">
-                  </div>
-                  <div class="col-lg-9">
-                    <div class="context">
-                      <h4>HAPPY MOTHER'S DAY!</h4>
-                      <p>Get one of our favorite menu for free!</p>
-                    </div>
+                <div class="col-lg-3">
+                  <img src="../assets/image 43.png" alt="" />
+                </div>
+                <div class="col-lg-9">
+                  <div class="context">
+                    <h4>Get a cup of coffee for free on sunday morning</h4>
+                    <p>Only at 7 to 9 AM</p>
                   </div>
                 </div>
+              </div>
             </div>
-            <div class="btn coupons" style="background:#C59378">
+            <div class="btn coupons" style="background: #88b788">
               <div class="row">
-                  <div class="col-lg-3">
-                  <img src="../assets/image 45.png" alt="">
-                  </div>
-                  <div class="col-lg-9">
-                    <div class="context">
-                      <h4>HAPPY HALLOWEN!</h4>
-                      <p>Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
-                    </div>
+                <div class="col-lg-3">
+                  <img src="../assets/image 46.png" alt="" />
+                </div>
+                <div class="col-lg-9">
+                  <div class="context">
+                    <h4>HAPPY MOTHER'S DAY!</h4>
+                    <p>Get one of our favorite menu for free!</p>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="btn coupons" style="background: #c59378">
+              <div class="row">
+                <div class="col-lg-3">
+                  <img src="../assets/image 45.png" alt="" />
+                </div>
+                <div class="col-lg-9">
+                  <div class="context">
+                    <h4>HAPPY HALLOWEN!</h4>
+                    <p>
+                      Do you like chicken wings? Get 1 free only if you buy
+                      pinky promise
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <button class="btn apply">Apply Coupons</button>
@@ -83,7 +86,7 @@
               <b-link
                 @click="categoryBind(element.id) || productSet()"
                 :class="
-                  categoryProduct == element.id ? 'text-white' : 'text-dark'
+                  categoryProduct == element.id ? 'text-secondary' : 'text-dark'
                 "
               >
                 {{ element.name }}
@@ -246,8 +249,13 @@ export default {
 </script>
 
 <style scoped>
-.col-lg-4{
-  border-right: 1px solid #5E5E5E;
+.image-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.col-lg-4 {
+  border-right: 1px solid #5e5e5e;
 }
 .col-lg-4 .head {
   text-align: center;

@@ -7,9 +7,7 @@
           <div class="picture">
             <img
               class="image"
-              :src="imgUrl"
-              alt="default-image"
-              @error="setAltImg"
+              :style="'background:url(' + imgUrl + '),url(/image/default.jpg)'"
             />
           </div>
           <div class="confirm">
@@ -29,8 +27,8 @@
           </div>
           <div class="stock">
             <h4>Category:</h4>
-            <select name="" id="" v-model="form.category">
-              <option selected>Category</option>
+            <select name="" id="" v-model="form.category" placeholder="Halo">
+              <option value="" disabled>--- Select Category ---</option>
               <option
                 v-for="(element, i) in category"
                 :key="i"
@@ -250,9 +248,12 @@ export default {
   height: 200px;
 }
 .col-lg-5 .image {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
   width: 200px;
   height: 200px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 100px 100px 100px 100px;
 }
 .col-lg-5 .confirm {
