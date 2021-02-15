@@ -1,24 +1,26 @@
-# coffeeshop_hardcode
+# COFFEE SHOP HARD CORE (FRONTEND)
 
-## Project setup
-```
-npm install
-```
+## About This Project
+This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, bootstrap, and etc.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+---
+## How To Use
+1. Clone this repository
+2. Clone backend repository and follow the steps
+3. Run `npm install`
+4. Run backend server `npm run start`
+5. Run frontend server `npm run serve`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+---
+## Features
+1. Sign Up
+2. Login
+3. CRUD
+4. Search, sort, pagination
+5. Cart
+6. History
+7. Form Validation
+8. OTP
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+---
+## The Interface
