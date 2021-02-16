@@ -3,8 +3,11 @@
     <div class="wallpaper" />
     <div class="register-page">
       <div class="navbar">
-        <p>Coffee Shop</p>
-        <h2>Login</h2>
+        <div class="row">
+          <img style="height: 30px; padding-left: 20px;" src="../assets/icons/coffee 1.png" />
+          <p style="padding-left: 10px;">Coffee Shop</p>
+        </div>
+        <h2 style="color: #6A4029;">Login</h2>
       </div>
       <div class="content-form">
         <form action="" @submit.prevent="goLogin()">
@@ -32,15 +35,15 @@
           <router-link class="btn" to="/register">Sign Up Here</router-link>
         </form>
       </div>
-      <div class="footer">Coffee Shop</div>
+      <!-- <div class="footer">Coffee Shop</div> -->
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 <script>
 import { mapActions } from 'vuex'
 import Alert from '../helper/swal'
-import Footer from '../components/Footer'
+// import Footer from '../components/Footer'
 export default {
   mixins: [Alert],
   data: () => {
@@ -67,7 +70,7 @@ export default {
     }
   },
   components: {
-    Footer
+    // Footer
   }
 }
 </script>
@@ -106,40 +109,47 @@ export default {
 .content-form form {
   width: 80%;
   padding: 10px;
-  transform: translate(15%, 15%);
+  transform: translate(15%, 0%);
 }
 .content-form form input {
   width: 100%;
-  height: 35px;
-  border-radius: 10px 10px 10px 10px;
+  height: 60px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
   border: 0.4px solid #000000;
 }
 .content-form form .login {
   margin-top: 10px;
   width: 100%;
-  height: 35px;
-  border-radius: 10px 10px 10px 10px;
+  height: 60px;
   border: none;
   background: #ffba33;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  color: #6A4029;
 }
 .content-form form .login-g {
   margin-top: 10px;
   width: 100%;
-  height: 35px;
-  border-radius: 10px 10px 10px 10px;
+  height: 60px;
   border: none;
   background: #ffffff;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 .content-form form .btn {
-  margin-top: 10px;
+  margin-top: 5px;
+  padding: 15px;
   width: 100%;
-  height: 35px;
-  border-radius: 10px 10px 10px 10px;
+  height: 60px;
   border: none;
   background: #6a4029;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
   color: #ffffff;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 .footer {
   position: absolute;

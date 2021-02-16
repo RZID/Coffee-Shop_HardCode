@@ -223,7 +223,11 @@ input[type="number"] {
 .col-lg-7 select {
   margin-top: 10px;
   width: 100%;
-  height: 50px;
+  height: 60px;
+  border: 1px solid #9F9F9F;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 20px;
 }
 .col-lg-7 .confirm {
   display: flex;
@@ -258,8 +262,11 @@ input[type="number"] {
 .col-lg-7 .save {
   margin-top: 20px;
   width: 100%;
-  height: 50px;
+  height: 70px;
   border: none;
-  border-radius: 10px 10px;
+  background: #6A4029;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
 }
 </style>
