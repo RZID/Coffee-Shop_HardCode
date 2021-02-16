@@ -14,6 +14,7 @@
             <input
               @input="setImage"
               type="file"
+              accept="image/png/jpg"
               id="selectedFile"
               style="display: none"
             />
@@ -207,8 +208,12 @@ export default {
     setImage (e) {
       this.form.image = ''
       const file = e.target.files[0]
-      this.imgUrl = URL.createObjectURL(file)
-      this.form.image = file
+      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
+        this.alertDanger('Please insert image with format jpg/jpeg/png')
+      } else {
+        this.imgUrl = URL.createObjectURL(file)
+        this.form.image = file
+      }
     }
   },
   mounted () {

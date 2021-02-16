@@ -13,8 +13,9 @@ const product = {
         setProduct (context, data) {
             let byCategory = data.category ? `searchParams=id_category&search=${data.category}` : `searchParams=id_category&search=1`
             let pagination = data.page ? `&page=${data.page}` : `page=1`
+            let order = data.order && data.orderMethod ? `&param=${data.order}&sort=${data.orderMethod}` : ''
             return new Promise((resolve, reject) => {
-                Axios.get(`${process.env.VUE_APP_BACKEND}/api/products?${byCategory}${pagination}`, {
+                Axios.get(`${process.env.VUE_APP_BACKEND}/api/products?${byCategory}${pagination}${order}`, {
                     headers: {
                         'token': context.getters.getToken
                     }

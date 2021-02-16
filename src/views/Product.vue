@@ -137,6 +137,30 @@
                 </div>
               </div>
             </div>
+            <div class="container">
+              Sort By
+              <div class="input-group">
+                <select
+                  class="custom-select"
+                  @change="productSet()"
+                  v-model="order"
+                >
+                  <option value="id">id</option>
+                  <option value="name">Name</option>
+                  <option value="price">Price</option>
+                </select>
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    @click="changeSort()"
+                  >
+                    <i class="fas fa-sort-alpha-up"></i>
+                    <i class="fas fa-sort-alpha-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="d-flex w-100 py-2">
               <div class="col-3 d-flex">
                 <b-pagination
@@ -178,7 +202,9 @@ export default {
   mixins: [currency],
   data: () => {
     return {
+      order: 'id',
       currentPage: 1,
+      orderMethod: 'asc',
       product: [],
       category: [],
       isLoading: false,
@@ -192,6 +218,10 @@ export default {
     ...mapActions({
       setProduct: 'product/setProduct'
     }),
+    changeSort () {
+      this.orderMethod = this.orderMethod == 'asc' ? 'desc' : 'asc'
+      this.productSet(1)
+    },
     changePage () {
       this.productSet(this.currentPage)
     },
@@ -211,15 +241,19 @@ export default {
       return `${process.env.VUE_APP_BACKEND}/images/${image}`
     },
     productSet (page) {
+      this.currentPage = page
       this.product = []
       this.isLoading = true
       this.isError = false
       this.errorMsg = ''
       const data = {
         category: this.categoryProduct,
-        page: page ? page : 1
+        page: page ? page : 1,
+        order: this.order,
+        orderMethod: this.orderMethod
       }
       this.setProduct(data).then(res => {
+        console.log(res)
         this.product = res.data.data
         this.pagination = res.data.pagination
       }).catch(err => {

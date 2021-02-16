@@ -118,8 +118,13 @@ export default {
         if (res) {
           this.toastSuccess('Success update product!')
         }
-      }).catch(err =>
-        this.dangerSuccess(err.response.message))
+      }).catch(err => {
+        if (err.response) {
+          this.dangerSuccess(err.response.message)
+        } else {
+          console.error(err)
+        }
+      })
     },
     getImage (image) {
       return `${process.env.VUE_APP_BACKEND}/images/${image}`
@@ -128,10 +133,13 @@ export default {
       e.target.src = "/image/default.jpg"
     },
     changeImg (e) {
-      this.image = ''
       const file = e.target.files[0]
-      this.imgUrl = URL.createObjectURL(file)
-      this.image = file
+      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
+        this.alertDanger('Please insert image with format jpg/jpeg/png')
+      } else {
+        this.imgUrl = URL.createObjectURL(file)
+        this.image = file
+      }
     }
   },
   mounted () {

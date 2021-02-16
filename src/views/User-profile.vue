@@ -52,7 +52,7 @@
                 <div class="changes mt-5">Do you want to save the change?</div>
                 <div id="save" class="mt-5">
                   <button class="btn-save" @click="save()">Save Change</button>
-                  <button class="btn-cancel" @click="setUserData()">
+                  <button class="btn-cancel" @click="$router.push('/')">
                     Cancel
                   </button>
                 </div>
@@ -155,6 +155,7 @@
 import Navbar from '../components/Navbar'
 import Axios from 'axios'
 import Alert from '../helper/swal'
+import moment from 'moment'
 export default {
   mixins: [Alert],
   data: () => {
@@ -189,7 +190,11 @@ export default {
         this.setUserData()
         this.toastSuccess('Your profile was updated!')
       }).catch((err) => {
-        this.toastDanger(err.response.message)
+        if (err.response) {
+          this.imgUrl = ''
+          this.image = ''
+          this.toastDanger(err.response.data.data.code)
+        }
       })
     },
     setGender (code) {
@@ -216,9 +221,14 @@ export default {
     },
     setImage (e) {
       this.image = ''
+      this.imgUrl = ''
       const file = e.target.files[0]
-      this.imgUrl = URL.createObjectURL(file)
-      this.image = file
+      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
+        this.alertDanger('Please insert image with format jpg/jpeg/png')
+      } else {
+        this.imgUrl = URL.createObjectURL(file)
+        this.image = file
+      }
     },
     setUserData () {
       Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
@@ -227,6 +237,8 @@ export default {
         }
       }).then((res) => {
         this.userData = res.data.data[0]
+        this.userData.birthdate = moment(res.data.data[0].birthdate).format('YYYY-MM-DD');
+        console.log(this.userData)
       }).catch(err => console.error(err))
     }
   },
