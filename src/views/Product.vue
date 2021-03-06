@@ -118,26 +118,22 @@
                 Apply Coupon
               </button>
             </div>
+            <p class="text-muted m-0">Terms and Condition</p>
             <p class="text-muted m-0">
-              Terms and Condition
-            </p>
-            <p class="text-muted m-0">
-              <small class=" font-poppins">
+              <small class="font-poppins">
                 1. You can only apply 1 coupon per day
               </small>
             </p>
             <p class="text-muted m-0">
-              <small class=" font-poppins">
-                2. It only for dine in
-              </small>
+              <small class="font-poppins"> 2. It only for dine in </small>
             </p>
             <p class="text-muted m-0">
-              <small class=" font-poppins">
+              <small class="font-poppins">
                 3. Buy 1 get 1 only for new user
               </small>
             </p>
             <p class="text-muted m-0">
-              <small class=" font-poppins">
+              <small class="font-poppins">
                 4. Should make member card to apply coupon
               </small>
             </p>
@@ -189,9 +185,7 @@
                     <div class="card shadow border-0 radius-40 card-product">
                       <img
                         :src="getImage(element.image)"
-                        :onerror="
-                          'this.onerror=null;this.src=`/image/default.jpg`'
-                        "
+                        :onerror="'this.onerror=null;this.src=`/image/default.jpg`'"
                         class="image-cover image-product shadow card-img-top"
                       />
                       <div class="card-body">

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="payment-method">
+    <div class="payment-method pb-3">
       <Navbar />
       <div class="container">
         <h1 class="check">Check out your item now!</h1>
-        <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-5 cart">
+        <div class="d-flex flex-column flex-md-row">
+          <div class="col-lg-5 col-md-5 cart">
             <div v-if="!getCart.length > 0" class="text-center">
               <div class="container">
                 <img src="/image/nodata.png" class="w-75" alt="" />
@@ -22,8 +22,8 @@
               <div class="product">
                 <div v-for="(element, i) in getCart" :key="i">
                   <hr />
-                  <div class="row py-3">
-                    <div class="col-lg-3">
+                  <div class="row-lg d-flex py-3">
+                    <div class="col-md-5 col-lg-3">
                       <img
                         :style="
                           'background-image:url(' +
@@ -40,10 +40,10 @@
                         <p class="m-0">{{ element.size }}</p>
                       </div>
                     </div>
-                    <div class="col-lg-4 d-flex">
-                      <div class="align-self-center">
+                    <div class="col-lg-4 ml-md-1">
+                      <div class="align-self-start align-item-start">
                         <p>IDR {{ toRupiah(element.price * element.qty) }}</p>
-                        <div class="d-flex justify-content-end">
+                        <div class="d-lg-flex">
                           <router-link :to="'/detail_product/' + element.id">
                             <span class="badge badge-pill badge-info">
                               <i class="fas fa-pen"></i>
@@ -67,7 +67,7 @@
 
               <hr />
               <div class="information px-2">
-                <div class="row">
+                <div class="d-flex">
                   <div class="col-lg reg-font">SUBTOTAL</div>
                   <div class="col-lg reg-font text-right">
                     IDR
@@ -80,7 +80,7 @@
                     }}
                   </div>
                 </div>
-                <div class="row">
+                <div class="d-flex">
                   <div class="col-lg reg-font">TAX & FEES</div>
                   <div class="col-lg reg-font text-right">
                     IDR
@@ -93,36 +93,38 @@
                     }}
                   </div>
                 </div>
-                <div class="row">
+                <div class="d-flex">
                   <div class="col-lg reg-font">SHIPPING</div>
                   <div class="col-lg reg-font text-right">IDR 10.000</div>
                 </div>
-                <div class="row mt-4">
-                  <div class="col-lg-4 reg-font"><h3>TOTAL</h3></div>
-                  <div class="col-lg-8 text-right reg-font">
-                    <h3>
-                      IDR
-                      {{
-                        toRupiah(
+                <hr />
+                <div class="d-flex pb-2">
+                  <div class="col-lg-4 col-md-3">TOTAL</div>
+                  <div class="col-lg-8 text-right">
+                    IDR
+                    {{
+                      toRupiah(
+                        getCart
+                          .map((el) => el.price * el.qty)
+                          .reduce((a, b) => a + b) +
                           getCart
                             .map((el) => el.price * el.qty)
-                            .reduce((a, b) => a + b) +
-                            getCart
-                              .map((el) => el.price * el.qty)
-                              .reduce((a, b) => a + b) /
-                              20 +
-                            10000
-                        )
-                      }}
-                    </h3>
+                            .reduce((a, b) => a + b) /
+                            20 +
+                          10000
+                      )
+                    }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-4 payment" v-if="getCart.length > 0">
+          <div
+            class="col-lg-4 col-md-4 ml-0 mt-sm-5 mt-md-1 ml-md-4 ml-lg-5 payment"
+            v-if="getCart.length > 0"
+          >
             <div class="header-adress">
-              <h4>Address details</h4>
+              <h4>Address</h4>
               <button @click="editAddr()">
                 <span v-if="edit">Edit</span><span v-else>Apply</span>
               </button>
@@ -153,55 +155,57 @@
               />
             </div>
             <h4 class="method-header">Payment method</h4>
-            <div class="payment-methods px-3">
-              <div class="row">
-                <div class="col-lg-2">
-                  <input
-                    id="card"
-                    type="radio"
-                    name="payment"
-                    v-model="detailDeliv.payment"
-                    value="1"
-                  />
+            <div class="payment-methods overflow-auto px-3">
+              <div class="py-md-3">
+                <div class="row-lg d-md-flex">
+                  <div class="col-lg-2 col-md-1">
+                    <input
+                      id="card"
+                      type="radio"
+                      name="payment"
+                      v-model="detailDeliv.payment"
+                      value="1"
+                    />
+                  </div>
+                  <div class="col-lg-10">
+                    <label class="m-0" for="card">
+                      <b-icon-credit-card /> Card
+                    </label>
+                  </div>
                 </div>
-                <div class="col-lg-10">
-                  <label class="m-0" for="card">
-                    <b-icon-credit-card /> Card
-                  </label>
+                <hr />
+                <div class="row-lg d-md-flex">
+                  <div class="col-lg-2 col-md-1">
+                    <input
+                      id="bank"
+                      type="radio"
+                      name="payment"
+                      v-model="detailDeliv.payment"
+                      value="2"
+                    />
+                  </div>
+                  <div class="col-lg-10">
+                    <label for="bank" class="m-0">
+                      <b-icon-wallet2 /> Bank account
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-lg-2">
-                  <input
-                    id="bank"
-                    type="radio"
-                    name="payment"
-                    v-model="detailDeliv.payment"
-                    value="2"
-                  />
-                </div>
-                <div class="col-lg-10">
-                  <label for="bank" class="m-0">
-                    <b-icon-wallet2 /> Bank account
-                  </label>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-lg-2">
-                  <input
-                    id="cod"
-                    type="radio"
-                    name="payment"
-                    v-model="detailDeliv.payment"
-                    value="3"
-                  />
-                </div>
-                <div class="col-lg-10">
-                  <label for="cod" class="m-0">
-                    <b-icon-box-seam /> Cash on delivery</label
-                  >
+                <hr />
+                <div class="row-lg d-md-flex">
+                  <div class="col-lg-2 col-md-1">
+                    <input
+                      id="cod"
+                      type="radio"
+                      name="payment"
+                      v-model="detailDeliv.payment"
+                      value="3"
+                    />
+                  </div>
+                  <div class="col-lg-10">
+                    <label for="cod" class="m-0">
+                      <b-icon-box-seam /> Cash on delivery</label
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,6 +312,10 @@ export default {
   font-family: "poppins-reg";
   src: url("../assets/fonts/Poppins/Poppins-Regular.ttf");
 }
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
 .reg-font {
   font-family: "poppins-reg" !important;
 }
@@ -333,7 +341,7 @@ textarea:focus {
   background-image: url("../assets/nathan-dumlao-zTZRZV86GhE-unsplash 1.png");
   background-size: cover;
   width: 100%;
-  height: 900px;
+  height: 100%;
 }
 .check {
   margin-top: 40px;
@@ -402,7 +410,7 @@ textarea:focus {
   height: 50px;
   border: none;
   color: white;
-  background: #6A4029;
+  background: #ffba33;
   box-shadow: 0px 10px 20px rgba(137, 85, 55, 0.4);
   border-radius: 15px;
 }
