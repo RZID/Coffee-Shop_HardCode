@@ -253,7 +253,7 @@
                 <div class="col">
                   <div v-if="$store.getters['auth/getUserData'].access == '0'">
                     <button
-                      class="btn btn-light btn-block btn-lg btnAdd"
+                      class="btn btn-light btn-block btn-lg btnAdd btn-brown"
                       @click="toAdd()"
                     >
                       Add new product

@@ -4,6 +4,7 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-lg-5">
+          <div class="picture">
           <img v-if="imgUrl" :src="imgUrl" alt="" />
           <img
             v-else
@@ -23,6 +24,7 @@
           >
             <b-icon icon="trash"></b-icon>
           </button>
+          </div>
           <div class="info">
             <p>Delivery only on Monday to friday at 1 - 7 pm</p>
           </div>
@@ -205,6 +207,11 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+.col-lg-5 .picture{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
 .col-lg-5 img {
   object-fit: cover;
   width: 400px;
@@ -221,7 +228,8 @@ input[type="number"] {
   height: 40px;
   border: 5px solid #ffba33;
   border-radius: 20px 20px;
-  transform: translate(-140%, 40%);
+  right: 5%;
+  top: 10px;
 }
 .col-lg-7 .info-product {
   width: 100%;

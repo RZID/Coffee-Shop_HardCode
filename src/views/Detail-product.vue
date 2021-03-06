@@ -4,6 +4,7 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-lg-5">
+          <div class="picture">
           <img
             v-if="dataProduct.image"
             :src="getImage(dataProduct.image)"
@@ -17,6 +18,7 @@
           >
             <b-icon icon="trash"></b-icon>
           </button>
+          </div>
         </div>
         <div class="col-lg-7">
           <h1 class="text-capitalize">{{ dataProduct.name }}</h1>
@@ -71,17 +73,23 @@
     <div class="container sec-con">
       <div class="pb-3">
         <div class="thisCheckout px-4">
-          <img src="../assets/TM.png" alt="" />
-          <div class="more-information d-flex m-0">
-            <span class="align-self-center">
-              <h3 class="m-0">{{ dataProduct.name }}</h3>
-            </span>
-          </div>
-          <div class="co">
-            <h3>Checkout</h3>
-            <button @click="$router.push('/cart')">
-              <b-icon icon="arrow-right" font-scale="3"></b-icon>
-            </button>
+          <img :src="getImage(dataProduct.image)" alt="" />
+          <div class="row">
+            <div class="col-lg-6 d-flex m-0">
+              <span class="align-self-center">
+                <h3 class="m-0">{{ dataProduct.name }}</h3>
+              </span>
+            </div>
+            <div class="col-lg-6 d-flex m-0">
+              <span class="align-self-center">
+                <h3>Checkout</h3>
+              </span>
+              <span class="align-self-center">
+                <button @click="$router.push('/cart')">
+                  <b-icon icon="arrow-right" font-scale="2"></b-icon>
+                </button>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -196,16 +204,25 @@ export default {
 .bg-choco {
   background: chocolate;
 }
+.col-lg-5{
+  position: relative;
+}
 .col-lg-5 .trash {
   position: absolute;
   z-index: 2;
-  transform: translate(20%, 470%);
   width: 50px;
   height: 50px;
   border: none;
   border-radius: 25px;
   color: white;
   background: chocolate;
+  bottom: 5%;
+  right: 20%;
+}
+.col-lg-5 .picture{
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 .col-lg-5 img {
   object-fit: cover;
@@ -213,7 +230,6 @@ export default {
   height: 300px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
   border-radius: 200px;
-  transform: translateX(25%);
 }
 .col-lg-5 .information {
   margin-top: 60px;
@@ -330,16 +346,7 @@ export default {
   padding: 20px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
-.sec-con .col-lg-3 .size {
-  margin-top: 20px;
-}
-.sec-con .col-lg-3 .size button {
-  width: 25%;
-  margin-right: 20px;
-  height: 60px;
-  border: none;
-  border-radius: 30px;
-}
+
 .sec-con .thisCheckout {
   height: 150px;
   display: flex;
@@ -356,35 +363,17 @@ export default {
   border-radius: 60px;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
-.sec-con .thisCheckout .more-information {
-  display: inline-block;
-  margin-top: 20px;
-  margin-left: 20px;
-}
-.sec-con .thisCheckout .more-information .items {
-  width: 100%;
-  height: 80px;
-  overflow: auto;
-}
-.sec-con .thisCheckout .co {
-  display: flex;
-  position: absolute;
-  right: 30px;
-}
-.sec-con .thisCheckout .co h3 {
-  transform: translateY(140%);
-  margin-right: 50px;
-}
-.sec-con .thisCheckout .co button {
+.sec-con .thisCheckout button {
   height: 50px;
   width: 50px;
   border: none;
   border-radius: 25px;
-  transform: translateY(100%);
 }
-.footer {
-  width: 100%;
-  background: gray;
-  height: 400px;
+
+@media (max-width: 992px){
+  .col-lg-5 .trash{
+    bottom: 0;
+    right: 0;
+  }
 }
 </style>

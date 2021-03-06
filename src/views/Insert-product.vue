@@ -243,20 +243,15 @@ export default {
   background: #ffba33;
   color: #6a4029;
 }
-.row {
-  height: 2200px;
-}
 .col-lg-5 {
   position: relative;
   width: 100%;
-  height: 400px;
 }
 .col-lg-5 .picture {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
   margin-top: 40px;
-  width: 35%;
+  width: 100%;
   height: 200px;
 }
 .col-lg-5 .image {
@@ -372,5 +367,11 @@ export default {
   background: rgba(186, 186, 186, 0.35);
   border-radius: 20px;
   font-size: 18px;
+}
+
+@media (max-width: 992px){
+  .col-lg-7{
+    border: none;
+  }
 }
 </style>

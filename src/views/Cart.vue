@@ -5,7 +5,7 @@
       <div class="container">
         <h1 class="check">Check out your item now!</h1>
         <div class="row">
-          <div class="col-lg-5 cart">
+          <div class="col-lg-5 col-md-5 col-sm-5 cart">
             <div v-if="!getCart.length > 0" class="text-center">
               <div class="container">
                 <img src="/image/nodata.png" class="w-75" alt="" />
@@ -120,7 +120,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 payment" v-if="getCart.length > 0">
+          <div class="col-lg-4 col-md-4 col-sm-4 payment" v-if="getCart.length > 0">
             <div class="header-adress">
               <h4>Address details</h4>
               <button @click="editAddr()">
@@ -343,7 +343,7 @@ textarea:focus {
 .cart {
   margin-top: 40px;
   width: 100%;
-  height: 500px;
+  height: 100%;
   background: white;
   border-radius: 25px;
 }
