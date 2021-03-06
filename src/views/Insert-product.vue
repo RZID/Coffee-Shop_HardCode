@@ -150,91 +150,98 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Alert from '../helper/swal'
-import Axios from 'axios'
-import { mapActions } from 'vuex'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Alert from "../helper/swal";
+import Axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   mixins: [Alert],
   data: () => {
     return {
       category: [],
-      imgUrl: '',
+      imgUrl: "",
       form: {
-        image: '',
-        name: '',
+        image: "",
+        name: "",
         price: null,
-        desc: '',
-        productSize: '',
-        deliv: '',
-        stock: '',
-        category: ''
-      }
-    }
+        desc: "",
+        productSize: "",
+        deliv: "",
+        stock: "",
+        category: "",
+      },
+    };
   },
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   methods: {
     ...mapActions({
-      insertData: 'product/insertData'
+      insertData: "product/insertData",
     }),
-    setAltImg (event) {
-      event.target.src = "/image/default.jpg"
-    },
-    save () {
-      if (!this.form.name || !this.form.price || !this.form.desc || !this.form.productSize || !this.form.deliv) {
-        this.alertDanger('You must fill all of input!')
+    save() {
+      if (
+        !this.form.name ||
+        !this.form.price ||
+        !this.form.desc ||
+        !this.form.productSize ||
+        !this.form.deliv
+      ) {
+        this.alertDanger("You must fill all of input!");
       } else {
-        this.insertData(this.form).then(res => {
-          if (res) {
-            this.toastSuccess('You\'ve inserted 1 product!')
-            this.$router.push('/').catch(() => { })
-          }
-        }).catch(err => {
-          this.toastDanger(err)
-        })
+        this.insertData(this.form)
+          .then((res) => {
+            if (res) {
+              this.toastSuccess("You've inserted 1 product!");
+              this.$router.push("/").catch(() => {});
+            }
+          })
+          .catch((err) => {
+            this.toastDanger(err);
+          });
       }
     },
-    size (el) {
-      return this.form.productSize = el
+    size(el) {
+      return (this.form.productSize = el);
     },
-    deliv (el) {
-      return this.form.deliv = el
+    deliv(el) {
+      return (this.form.deliv = el);
     },
-    setImage (e) {
-      this.form.image = ''
-      const file = e.target.files[0]
-      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
-        this.alertDanger('Please insert image with format jpg/jpeg/png')
+    setImage(e) {
+      this.form.image = "";
+      const file = e.target.files[0];
+      if (file["type"] !== "image/jpeg" && file["type"] !== "image/png") {
+        this.alertDanger("Please insert image with format jpg/jpeg/png");
       } else {
-        this.imgUrl = URL.createObjectURL(file)
-        this.form.image = file
+        this.imgUrl = URL.createObjectURL(file);
+        this.form.image = file;
       }
-    }
+    },
   },
-  mounted () {
-    window.scrollTo(0, 0)
+  mounted() {
+    window.scrollTo(0, 0);
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
       headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then((res) => {
-      this.category = res.data.data
-    }).catch(err => {
-      console.error(err)
+        token: this.$store.getters["auth/getToken"],
+      },
     })
-  }
-}
+      .then((res) => {
+        this.category = res.data.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+};
 </script>
 
 <style scoped>
 .bg-choco {
-  background: #FFBA33;
-  color: #6A4029;
+  background: #ffba33;
+  color: #6a4029;
 }
 .row {
   height: 2200px;
@@ -299,8 +306,8 @@ export default {
   padding: 10px;
   width: 80%;
   height: 75px;
-  background: #FFFFFF;
-  border: 1px solid #9F9F9F;
+  background: #ffffff;
+  border: 1px solid #9f9f9f;
   box-sizing: border-box;
   border-radius: 20px;
 }
@@ -316,8 +323,8 @@ export default {
   width: 80%;
   height: 50px;
   margin-bottom: 20px;
-  background: #FFFFFF;
-  border: 1px solid #9F9F9F;
+  background: #ffffff;
+  border: 1px solid #9f9f9f;
   box-sizing: border-box;
   border-radius: 20px;
 }
@@ -351,7 +358,7 @@ export default {
   border: none;
   border-radius: 20px;
   margin-right: 20px;
-  background: #6A4029;
+  background: #6a4029;
   color: white;
   box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.4);
   font-size: 18px;

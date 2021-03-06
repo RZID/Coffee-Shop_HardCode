@@ -12,12 +12,12 @@
                   class="cover"
                   :style="
                     'background-image:url(' +
-                    imgUrl +
-                    '),url(' +
-                    getImage(userData.image) +
-                    '), url(' +
-                    getImage('default_photo.png') +
-                    ')'
+                      imgUrl +
+                      '),url(' +
+                      getImage(userData.image) +
+                      '), url(' +
+                      getImage('default_photo.png') +
+                      ')'
                   "
                 />
                 <div class="information text-center mt-2">
@@ -152,101 +152,129 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Axios from 'axios'
-import Alert from '../helper/swal'
-import moment from 'moment'
+import Navbar from "../components/Navbar";
+import Axios from "axios";
+import Alert from "../helper/swal";
+import moment from "moment";
 export default {
   mixins: [Alert],
   data: () => {
     return {
       userData: {},
-      imgUrl: '',
-      image: ''
-    }
+      imgUrl: "",
+      image: "",
+    };
   },
   components: {
-    Navbar
+    Navbar,
   },
   methods: {
-    save () {
-      console.log(this.userData)
-      let data = new FormData()
-      this.userData.phone ? data.append('phone', this.userData.phone) : ''
-      this.userData.gender ? data.append('gender', this.userData.gender) : ''
-      this.userData.birthdate ? data.append('birthdate', this.userData.birthdate) : ''
-      this.userData.display_name ? data.append('display_name', this.userData.display_name) : ''
-      this.userData.first_name ? data.append('first_name', this.userData.first_name) : ''
-      this.userData.last_name ? data.append('last_name', this.userData.last_name) : ''
-      this.userData.address ? data.append('address', this.userData.address) : ''
+    save() {
+      console.log(this.userData);
+      let data = new FormData();
+      this.userData.phone ? data.append("phone", this.userData.phone) : "";
+      this.userData.gender ? data.append("gender", this.userData.gender) : "";
+      this.userData.birthdate
+        ? data.append("birthdate", this.userData.birthdate)
+        : "";
+      this.userData.display_name
+        ? data.append("display_name", this.userData.display_name)
+        : "";
+      this.userData.first_name
+        ? data.append("first_name", this.userData.first_name)
+        : "";
+      this.userData.last_name
+        ? data.append("last_name", this.userData.last_name)
+        : "";
+      this.userData.address
+        ? data.append("address", this.userData.address)
+        : "";
       if (this.image) {
-        data.append('image', this.image)
+        data.append("image", this.image);
       }
-      Axios.patch(`${process.env.VUE_APP_BACKEND}/api/user/${this.userData.id}`, data, {
-        headers: {
-          'token': this.$store.getters['auth/getToken']
-        }
-      }).then(() => {
-        this.setUserData()
-        this.toastSuccess('Your profile was updated!')
-      }).catch((err) => {
-        if (err.response) {
-          this.imgUrl = ''
-          this.image = ''
-          this.toastDanger(err.response.data.data.code)
-        }
-      })
-    },
-    setGender (code) {
-      this.userData.gender = code
-    },
-    getImage (image) {
-      return `${process.env.VUE_APP_BACKEND}/images/${image}`
-    },
-    removePhoto () {
-      this.alertQuestion('Want to delete photo ?').then(() => {
-        this.imgUrl = ''
-        this.image = ''
-        Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/delete_photo/${this.userData.id}`, {
+      Axios.patch(
+        `${process.env.VUE_APP_BACKEND}/api/user/${this.userData.id}`,
+        data,
+        {
           headers: {
-            'token': this.$store.getters['auth/getToken']
-          }
-        }).then(() => {
-          this.setUserData()
-          this.toastSuccess('Your profile was updated!')
-        }).catch((err) => {
-          console.error(err)
+            token: this.$store.getters["auth/getToken"],
+          },
+        }
+      )
+        .then(() => {
+          this.setUserData();
+          this.toastSuccess("Your profile was updated!");
         })
-      })
+        .catch((err) => {
+          if (err.response) {
+            this.imgUrl = "";
+            this.image = "";
+            this.toastDanger(err.response.data.data.code);
+          }
+        });
     },
-    setImage (e) {
-      this.image = ''
-      this.imgUrl = ''
-      const file = e.target.files[0]
-      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
-        this.alertDanger('Please insert image with format jpg/jpeg/png')
+    setGender(code) {
+      this.userData.gender = code;
+    },
+    getImage(image) {
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`;
+    },
+    removePhoto() {
+      this.alertQuestion("Want to delete photo ?").then(() => {
+        this.imgUrl = "";
+        this.image = "";
+        Axios.get(
+          `${process.env.VUE_APP_BACKEND}/api/user/delete_photo/${this.userData.id}`,
+          {
+            headers: {
+              token: this.$store.getters["auth/getToken"],
+            },
+          }
+        )
+          .then(() => {
+            this.setUserData();
+            this.toastSuccess("Your profile was updated!");
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
+    },
+    setImage(e) {
+      this.image = "";
+      this.imgUrl = "";
+      const file = e.target.files[0];
+      if (file["type"] !== "image/jpeg" && file["type"] !== "image/png") {
+        this.alertDanger("Please insert image with format jpg/jpeg/png");
       } else {
-        this.imgUrl = URL.createObjectURL(file)
-        this.image = file
+        this.imgUrl = URL.createObjectURL(file);
+        this.image = file;
       }
     },
-    setUserData () {
-      Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
-        headers: {
-          'token': this.$store.getters['auth/getToken']
+    setUserData() {
+      Axios.get(
+        `${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters["auth/getUserData"].uid}`,
+        {
+          headers: {
+            token: this.$store.getters["auth/getToken"],
+          },
         }
-      }).then((res) => {
-        this.userData = res.data.data[0]
-        this.userData.birthdate = moment(res.data.data[0].birthdate).format('YYYY-MM-DD');
-        console.log(this.userData)
-      }).catch(err => console.error(err))
-    }
+      )
+        .then((res) => {
+          this.userData = res.data.data[0];
+          this.userData.birthdate = moment(res.data.data[0].birthdate).format(
+            "YYYY-MM-DD"
+          );
+          console.log(this.userData);
+        })
+        .catch((err) => console.error(err));
+    },
   },
-  mounted () {
-    window.scrollTo(0, 0)
-    this.setUserData()
-  }
-}
+  mounted() {
+    window.scrollTo(0, 0);
+    this.setUserData();
+  },
+};
 </script>
 
 <style scoped>

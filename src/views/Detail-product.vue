@@ -7,7 +7,7 @@
           <img
             v-if="dataProduct.image"
             :src="getImage(dataProduct.image)"
-            @error="setAltImg"
+            onerror="this.onerror=null;this.src='/image/default.jpg'"
             :alt="'Image of ' + dataProduct.name"
           />
           <button
@@ -91,95 +91,105 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Axios from 'axios'
-import currency from '../helper/currency'
-import Alert from '../helper/swal'
-import Footer from '../components/Footer'
-import { mapGetters, mapActions } from 'vuex'
+import Navbar from "../components/Navbar";
+import Axios from "axios";
+import currency from "../helper/currency";
+import Alert from "../helper/swal";
+import Footer from "../components/Footer";
+import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      getCart: 'cart/getCart'
-    })
+      getCart: "cart/getCart",
+    }),
   },
-  mounted () {
-    if (this.getCart.filter(el => el.id == this.$route.params.id).length > 0) {
-      this.qty = this.getCart.filter(el => el.id == this.$route.params.id)[0].qty
+  mounted() {
+    if (
+      this.getCart.filter((el) => el.id == this.$route.params.id).length > 0
+    ) {
+      this.qty = this.getCart.filter(
+        (el) => el.id == this.$route.params.id
+      )[0].qty;
     }
-    Axios.get(`${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`, {
-      headers: {
-        'token': this.$store.getters['auth/getToken']
+    Axios.get(
+      `${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`,
+      {
+        headers: {
+          token: this.$store.getters["auth/getToken"],
+        },
       }
-    }).then((res) => this.dataProduct = res.data.data[0]).catch(err => console.error(err))
+    )
+      .then((res) => (this.dataProduct = res.data.data[0]))
+      .catch((err) => console.error(err));
   },
   mixins: [currency, Alert],
   data: () => {
     return {
       dataProduct: {},
       qty: 1,
-      now: true
-    }
+      now: true,
+    };
   },
   methods: {
     ...mapActions({
-      sendCart: 'cart/addToCart'
+      sendCart: "cart/addToCart",
     }),
-    setNow (val) {
-      this.now = val
+    setNow(val) {
+      this.now = val;
     },
-    addToCart () {
+    addToCart() {
       const data = {
         id: this.dataProduct.id,
         name: this.dataProduct.name,
         qty: this.qty,
         image: this.dataProduct.image,
         price: this.dataProduct.price,
-        size: this.dataProduct.size
-      }
-      this.sendCart(data)
-      this.toastSuccess('Sent to cart')
+        size: this.dataProduct.size,
+      };
+      this.sendCart(data);
+      this.toastSuccess("Sent to cart");
     },
-    decrementQty () {
+    decrementQty() {
       if (this.qty > 1) {
-        this.qty = this.qty - 1
+        this.qty = this.qty - 1;
       }
     },
-    incrementQty () {
-      this.qty = this.qty + 1
+    incrementQty() {
+      this.qty = this.qty + 1;
     },
-    getImage (image) {
-      return `${process.env.VUE_APP_BACKEND}/images/${image}`
+    getImage(image) {
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`;
     },
-    setAltImg (event) {
-      event.target.src = "/image/default.jpg"
+    toEdit(id) {
+      this.$router.push(`/edit_product/${id}`).catch(() => {});
     },
-    toEdit (id) {
-      this.$router.push(`/edit_product/${id}`).catch(() => { })
-    },
-    deleteProduct () {
-      this.alertQuestion('Delete this product?').then(() => {
-        Axios.delete(`${process.env.VUE_APP_BACKEND}/api/products/${this.dataProduct.id}`, {
-          headers: {
-            'token': this.$store.getters['auth/getToken']
+    deleteProduct() {
+      this.alertQuestion("Delete this product?").then(() => {
+        Axios.delete(
+          `${process.env.VUE_APP_BACKEND}/api/products/${this.dataProduct.id}`,
+          {
+            headers: {
+              token: this.$store.getters["auth/getToken"],
+            },
           }
-        }).then((res) => {
-          if (res) {
-            this.toastSuccess('Success delete this product')
-            this.$router.push('/').catch(() => { })
-          }
-        }).catch(err => {
-          this.toastDanger(err.response.statusText)
-        })
-      })
-    }
+        )
+          .then((res) => {
+            if (res) {
+              this.toastSuccess("Success delete this product");
+              this.$router.push("/").catch(() => {});
+            }
+          })
+          .catch((err) => {
+            this.toastDanger(err.response.statusText);
+          });
+      });
+    },
   },
   components: {
     Navbar,
-    Footer
-  }
-}
-
+    Footer,
+  },
+};
 </script>
 
 <style scoped>
@@ -267,10 +277,10 @@ export default {
   display: flex;
   width: 120px;
   height: 50px;
-  border: 1px solid #9F9F9F;
+  border: 1px solid #9f9f9f;
   box-sizing: border-box;
   border-radius: 10px;
-  color: #6A4029;
+  color: #6a4029;
   font-size: 20px;
 }
 .col-lg-7 .price .auto-text p {
@@ -283,7 +293,7 @@ export default {
 .col-lg-7 .price .auto-text button {
   border: none;
   width: 70px;
-  color: #6A4029;
+  color: #6a4029;
 }
 .col-lg-7 .price h4 {
   position: absolute;
@@ -295,7 +305,7 @@ export default {
   width: 100%;
   height: 70px;
   border: none;
-  background: #6A4029;
+  background: #6a4029;
   border-radius: 20px;
   color: white;
   font-size: 20px;
@@ -305,9 +315,9 @@ export default {
   width: 100%;
   height: 70px;
   border: none;
-  background: #FFBA33;
+  background: #ffba33;
   border-radius: 20px;
-  color: #6A4029;
+  color: #6a4029;
   font-size: 20px;
 }
 .sec-con .col-lg-3 {

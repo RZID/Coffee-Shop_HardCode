@@ -8,7 +8,7 @@
           <img
             v-else
             :src="getImage(dataProduct.image)"
-            @error="setDefaultImage"
+            onerror="this.onerror=null;this.src='/image/default.jpg'"
             alt=""
           />
           <input
@@ -77,12 +77,12 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Axios from 'axios'
-import currency from '../helper/currency'
-import Alert from '../helper/swal'
-import { mapActions } from 'vuex'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Axios from "axios";
+import currency from "../helper/currency";
+import Alert from "../helper/swal";
+import { mapActions } from "vuex";
 export default {
   mixins: [Alert, currency],
   data: () => {
@@ -90,19 +90,19 @@ export default {
       dataProduct: {},
       size: [],
       delivery: [],
-      image: '',
-      imgUrl: ''
-    }
+      image: "",
+      imgUrl: "",
+    };
   },
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   methods: {
     ...mapActions({
-      updateData: 'product/updateData'
+      updateData: "product/updateData",
     }),
-    update () {
+    update() {
       const data = {
         id: this.dataProduct.id,
         name: this.dataProduct.name,
@@ -112,69 +112,77 @@ export default {
         desc: this.dataProduct.description,
         stock: this.dataProduct.stock,
         deliv: this.dataProduct.productDelivery,
-        image: this.image ? this.image : false
-      }
-      this.updateData(data).then((res) => {
-        if (res) {
-          this.toastSuccess('Success update product!')
-        }
-      }).catch(err => {
-        if (err.response) {
-          this.dangerSuccess(err.response.message)
-        } else {
-          console.error(err)
-        }
-      })
+        image: this.image ? this.image : false,
+      };
+      this.updateData(data)
+        .then((res) => {
+          if (res) {
+            this.toastSuccess("Success update product!");
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            this.dangerSuccess(err.response.message);
+          } else {
+            console.error(err);
+          }
+        });
     },
-    getImage (image) {
-      return `${process.env.VUE_APP_BACKEND}/images/${image}`
+    getImage(image) {
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`;
     },
-    setDefaultImage (e) {
-      e.target.src = "/image/default.jpg"
-    },
-    changeImg (e) {
-      const file = e.target.files[0]
-      if (file['type'] !== 'image/jpeg' || file['type'] !== 'image/png') {
-        this.alertDanger('Please insert image with format jpg/jpeg/png')
+    changeImg(e) {
+      const file = e.target.files[0];
+      if (file["type"] !== "image/jpeg" && file["type"] !== "image/png") {
+        this.alertDanger("Please insert image with format jpg/jpeg/png");
       } else {
-        this.imgUrl = URL.createObjectURL(file)
-        this.image = file
+        this.imgUrl = URL.createObjectURL(file);
+        this.image = file;
       }
-    }
+    },
   },
-  mounted () {
-    window.scrollTo(0, 0)
-    Axios.get(`${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`, {
-      headers: {
-        'token': this.$store.getters['auth/getToken']
+  mounted() {
+    window.scrollTo(0, 0);
+    Axios.get(
+      `${process.env.VUE_APP_BACKEND}/api/product/${this.$route.params.id}`,
+      {
+        headers: {
+          token: this.$store.getters["auth/getToken"],
+        },
       }
-    }).then((res) => {
-      this.dataProduct = res.data.data[0]
-    }).catch(err => {
-      console.error(err)
-    })
+    )
+      .then((res) => {
+        this.dataProduct = res.data.data[0];
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/productsize/`, {
       headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then((res) => {
-      this.size = res.data.data
-    }).catch(err => {
-      console.error(err)
+        token: this.$store.getters["auth/getToken"],
+      },
     })
+      .then((res) => {
+        this.size = res.data.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/delivery/`, {
       headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then((res) => {
-      this.delivery = res.data.data
-    }).catch(err => {
-      console.error(err)
+        token: this.$store.getters["auth/getToken"],
+      },
     })
-  }
-}
+      .then((res) => {
+        this.delivery = res.data.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+};
 </script>
 
 <style scoped>
@@ -224,7 +232,7 @@ input[type="number"] {
   margin-top: 10px;
   width: 100%;
   height: 60px;
-  border: 1px solid #9F9F9F;
+  border: 1px solid #9f9f9f;
   box-sizing: border-box;
   border-radius: 10px;
   padding: 20px;
@@ -264,7 +272,7 @@ input[type="number"] {
   width: 100%;
   height: 70px;
   border: none;
-  background: #6A4029;
+  background: #6a4029;
   border-radius: 10px;
   color: white;
   font-size: 20px;

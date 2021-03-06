@@ -3,184 +3,262 @@
     <Navbar class="sticky-top" />
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-4 text-center">
-          <div class="head mb-5">
-            <br />
-            <h4 class="mt-1">Promo Today</h4>
-            <p class="mt-4">Coupons will be updated every weeks.</p>
-            <p>Check them out!</p>
+        <div class="col-md-4 border-right d-none d-lg-block">
+          <div class="py-5 text-center">
+            <h4 class="mb-3 text-brown">Promo Today</h4>
+            <small class="font-poppins">
+              Coupons will be updated every weeks. <br />
+              Check them out!
+            </small>
           </div>
-          <div class="content-coupons">
-            <div class="btn coupons" style="background: #88b788">
-              <div class="row">
-                <div class="col-lg-3">
-                  <img src="../assets/image 46.png" alt="" />
-                </div>
-                <div class="col-lg-9">
-                  <div class="context">
-                    <h4>HAPPY MOTHER'S DAY!</h4>
-                    <p>Get one of our favorite menu for free!</p>
+          <div class="py-3 px-4">
+            <!-- Coupon 1 -->
+            <div class="card mb-3 border-0 radius-20 bg-green">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-4">
+                    <img
+                      class="image-coupons"
+                      src="../assets/image 43.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col d-flex">
+                    <div class="align-self-center">
+                      <p class="m-0">HAPPY MOTHER'S DAY!</p>
+                      <small class="m-0 font-poppins">
+                        Get one of our favourite <br />
+                        menu for free!
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="btn coupons" style="background: #f5c361">
-              <div class="row">
-                <div class="col-lg-3">
-                  <img src="../assets/image 43.png" alt="" />
-                </div>
-                <div class="col-lg-9">
-                  <div class="context">
-                    <h4>Get a cup of coffee for free on sunday morning</h4>
-                    <p>Only at 7 to 9 AM</p>
+            <!-- End Of Coupon 1 -->
+
+            <!-- Coupon 2 -->
+            <div class="card mb-3 border-0 radius-20 bg-cream">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-4">
+                    <img
+                      class="image-coupons"
+                      src="../assets/image 46.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col d-flex">
+                    <div class="align-self-center">
+                      <p class="m-0">
+                        Get a cup of coffee for free on sunday morning
+                      </p>
+                      <small class="m-0 font-poppins">
+                        Only at 7 to 9 AM
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="btn coupons" style="background: #88b788">
-              <div class="row">
-                <div class="col-lg-3">
-                  <img src="../assets/image 46.png" alt="" />
-                </div>
-                <div class="col-lg-9">
-                  <div class="context">
-                    <h4>HAPPY MOTHER'S DAY!</h4>
-                    <p>Get one of our favorite menu for free!</p>
+            <!-- End Of Coupon 2 -->
+
+            <!-- Coupon 3 -->
+            <div class="card mb-3 border-0 radius-20 bg-green">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-4">
+                    <img
+                      class="image-coupons"
+                      src="../assets/image 43.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col d-flex">
+                    <div class="align-self-center">
+                      <p class="m-0">HAPPY MOTHER'S DAY!</p>
+                      <small class="m-0 font-poppins">
+                        Get one of our favourite <br />
+                        menu for free!
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="btn coupons" style="background: #c59378">
-              <div class="row">
-                <div class="col-lg-3">
-                  <img src="../assets/image 45.png" alt="" />
-                </div>
-                <div class="col-lg-9">
-                  <div class="context">
-                    <h4>HAPPY HALLOWEN!</h4>
-                    <p>
-                      Do you like chicken wings? Get 1 free only if you buy
-                      pinky promise
-                    </p>
+            <!-- End Of Coupon 3 -->
+
+            <!-- Coupon 4 -->
+            <div class="card mb-3 border-0 radius-20 bg-browny-pink">
+              <div class="card-body">
+                <div class="row no-gutters">
+                  <div class="col-4">
+                    <img
+                      class="image-coupons"
+                      src="../assets/image 45.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col d-flex">
+                    <div class="align-self-center">
+                      <p class="m-0">HAPPY HALLOWEEN!</p>
+                      <small class="m-0 font-poppins">
+                        Do you like chicken wings? Get 1 <br />
+                        free only if you buy pinky promise
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <button class="btn apply">Apply Coupons</button>
-          <div class="information text-justify">
-            <p>Terms and Condition</p>
-            <p>1. You can only apply 1 coupon per day</p>
-            <p>2. It only for dine in</p>
-            <p>3. Buy 1 get 1 only for new user</p>
-            <p>4. Should make member card to apply coupon</p>
+            <!-- End Of Coupon 4 -->
+
+            <div class="py-5">
+              <button class="btn btn-brown btn-block btn-lg radius-20 p-3">
+                Apply Coupon
+              </button>
+            </div>
+            <p class="text-muted m-0">
+              Terms and Condition
+            </p>
+            <p class="text-muted m-0">
+              <small class=" font-poppins">
+                1. You can only apply 1 coupon per day
+              </small>
+            </p>
+            <p class="text-muted m-0">
+              <small class=" font-poppins">
+                2. It only for dine in
+              </small>
+            </p>
+            <p class="text-muted m-0">
+              <small class=" font-poppins">
+                3. Buy 1 get 1 only for new user
+              </small>
+            </p>
+            <p class="text-muted m-0">
+              <small class=" font-poppins">
+                4. Should make member card to apply coupon
+              </small>
+            </p>
           </div>
         </div>
-        <div class="col-lg-8 p-0">
-          <div class="navbar">
-            <div
-              class="col text-center"
-              v-for="(element, i) in category"
-              :key="i"
-            >
-              <b-link
-                @click="categoryBind(element.id) || productSet()"
-                :class="
-                  categoryProduct == element.id ? 'text-secondary' : 'text-dark'
-                "
+        <div class="col">
+          <div class="py-3">
+            <div class="row">
+              <div
+                class="col text-center"
+                v-for="(element, i) in category"
+                :key="i"
               >
-                {{ element.name }}
-              </b-link>
+                <b-link
+                  @click="categoryBind(element.id) || productSet()"
+                  class="text-decoration-none"
+                  :class="
+                    categoryProduct == element.id
+                      ? 'text-brown'
+                      : 'text-secondary'
+                  "
+                >
+                  <h5>
+                    <small
+                      class="pb-2"
+                      :class="
+                        categoryProduct != element.id
+                          ? 'font-poppins'
+                          : 'active-bar'
+                      "
+                    >
+                      {{ element.name }}
+                    </small>
+                  </h5>
+                </b-link>
+              </div>
             </div>
-          </div>
-          <div class="menu">
-            <div class="product">
-              <div v-if="isLoading">
-                <div class="container text-center text-light">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                  <h5>Please wait...</h5>
-                </div>
-              </div>
-              <div v-else-if="isError" class="text-black text-center">
-                <h4>Oops...</h4>
-                <p class="text-light">{{ errorMsg }}</p>
-              </div>
-              <div v-else>
-                <div class="row">
-                  <div
-                    v-for="(element, i) in product"
-                    :key="i"
-                    class="col-lg-3 card p-0"
+            <div class="container min-vh-100">
+              <div class="row py-5">
+                <div
+                  class="col-lg-3 col-md-6 col-12 mb-3 text-center"
+                  v-for="(element, i) in product"
+                  :key="i"
+                >
+                  <b-link
+                    @click="goToDetail(element.id)"
+                    class="text-dark text-decoration-none"
                   >
-                    <b-link @click="goToDetail(element.id)" class="text-dark">
+                    <div class="card shadow border-0 radius-40 card-product">
                       <img
-                        :style="
-                          'background-image:url(' +
-                          getImage(element.image) +
-                          ')' +
-                          ',url(/image/default.jpg)'
+                        :src="getImage(element.image)"
+                        :onerror="
+                          'this.onerror=null;this.src=`/image/default.jpg`'
                         "
-                        class="image-cover"
+                        class="image-cover image-product shadow card-img-top"
                       />
                       <div class="card-body">
-                        <h5 class="card-title">
-                          ({{ element.size }}) - {{ element.name }}
-                        </h5>
-                        <p class="card-text">
+                        <h4>({{ element.size }}) - {{ element.name }}</h4>
+                        <h6 class="font-poppins font-weight-bold text-brown">
                           IDR {{ toRupiah(element.price) }}
-                        </p>
+                        </h6>
                       </div>
-                    </b-link>
+                    </div>
+                  </b-link>
+                </div>
+              </div>
+              <p class="text-brown font-poppins">
+                *the price has been cutted by discount appears
+              </p>
+              <div class="container">
+                Sort By
+                <div class="input-group">
+                  <select
+                    class="custom-select"
+                    @change="productSet()"
+                    v-model="order"
+                  >
+                    <option value="id">id</option>
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                  </select>
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      @click="changeSort()"
+                    >
+                      <i
+                        v-if="orderMethod == 'asc'"
+                        class="fas fa-sort-alpha-up"
+                      ></i>
+                      <i v-else class="fas fa-sort-alpha-down"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="container">
-              Sort By
-              <div class="input-group">
-                <select
-                  class="custom-select"
-                  @change="productSet()"
-                  v-model="order"
-                >
-                  <option value="id">id</option>
-                  <option value="name">Name</option>
-                  <option value="price">Price</option>
-                </select>
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    @click="changeSort()"
+            <div>
+              <div class="d-flex w-100 py-2">
+                <div class="col-3 d-flex">
+                  <b-pagination
+                    class="align-self-center m-0"
+                    v-model="currentPage"
+                    :total-rows="pagination.totalData"
+                    :per-page="12"
+                    aria-controls="my-table"
+                    size="sm"
+                    variant="info"
+                    @input="changePage()"
                   >
-                    <i class="fas fa-sort-alpha-up"></i>
-                    <i class="fas fa-sort-alpha-down"></i>
-                  </button>
+                  </b-pagination>
                 </div>
-              </div>
-            </div>
-            <div class="d-flex w-100 py-2">
-              <div class="col-3 d-flex">
-                <b-pagination
-                  class="align-self-center m-0"
-                  v-model="currentPage"
-                  :total-rows="pagination.totalData"
-                  :per-page="12"
-                  aria-controls="my-table"
-                  size="sm"
-                  @input="changePage()"
-                ></b-pagination>
-              </div>
-              <div class="col">
-                <div v-if="$store.getters['auth/getUserData'].access == '0'">
-                  <button
-                    class="btn btn-light btn-block btn-lg btnAdd"
-                    @click="toAdd()"
-                  >
-                    Add new product
-                  </button>
+                <div class="col">
+                  <div v-if="$store.getters['auth/getUserData'].access == '0'">
+                    <button
+                      class="btn btn-light btn-block btn-lg btnAdd"
+                      @click="toAdd()"
+                    >
+                      Add new product
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -188,177 +266,124 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <div class="d-none d-md-block">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import currency from '../helper/currency'
-import Footer from '../components/Footer'
-import Axios from 'axios'
-import { mapActions } from 'vuex'
+import Navbar from "../components/Navbar";
+import currency from "../helper/currency";
+import Footer from "../components/Footer";
+import Axios from "axios";
+import { mapActions } from "vuex";
 export default {
   mixins: [currency],
   data: () => {
     return {
-      order: 'id',
+      order: "id",
       currentPage: 1,
-      orderMethod: 'asc',
+      orderMethod: "asc",
       product: [],
       category: [],
       isLoading: false,
       isError: false,
-      errorMsg: '',
+      errorMsg: "",
       categoryProduct: 1,
-      pagination: []
-    }
+      pagination: [],
+    };
   },
   methods: {
     ...mapActions({
-      setProduct: 'product/setProduct'
+      setProduct: "product/setProduct",
     }),
-    changeSort () {
-      this.orderMethod = this.orderMethod == 'asc' ? 'desc' : 'asc'
-      this.productSet(1)
+    changeSort() {
+      this.orderMethod = this.orderMethod == "asc" ? "desc" : "asc";
+      this.productSet(1);
     },
-    changePage () {
-      this.productSet(this.currentPage)
+    changePage() {
+      this.productSet(this.currentPage);
     },
-    categoryBind (id) {
-      this.categoryProduct = id
+    categoryBind(id) {
+      this.categoryProduct = id;
     },
-    toAdd () {
-      this.$router.push('/new_product')
+    toAdd() {
+      this.$router.push("/new_product");
     },
-    goToDetail (id) {
-      this.$router.push(`/detail_product/${id}`)
+    goToDetail(id) {
+      this.$router.push(`/detail_product/${id}`);
     },
-    setAltImg (event) {
-      event.target.src = "/image/default.jpg"
+    setAltImg(event) {
+      event.target.src = "/image/default.jpg";
     },
-    getImage (image) {
-      return `${process.env.VUE_APP_BACKEND}/images/${image}`
+    getImage(image) {
+      return `${process.env.VUE_APP_BACKEND}/images/${image}`;
     },
-    productSet (page) {
-      this.currentPage = page
-      this.product = []
-      this.isLoading = true
-      this.isError = false
-      this.errorMsg = ''
+    productSet(page) {
+      this.currentPage = page;
+      this.product = [];
+      this.isLoading = true;
+      this.isError = false;
+      this.errorMsg = "";
       const data = {
         category: this.categoryProduct,
         page: page ? page : 1,
         order: this.order,
-        orderMethod: this.orderMethod
-      }
-      this.setProduct(data).then(res => {
-        console.log(res)
-        this.product = res.data.data
-        this.pagination = res.data.pagination
-      }).catch(err => {
-        this.isError = true
-        this.errorMsg = err.response.data.message
-      }).finally(() => {
-        this.isLoading = false
-      })
-    }
+        orderMethod: this.orderMethod,
+      };
+      this.setProduct(data)
+        .then((res) => {
+          console.log(res);
+          this.product = res.data.data;
+          this.pagination = res.data.pagination;
+        })
+        .catch((err) => {
+          this.isError = true;
+          this.errorMsg = err.response.data.message;
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
+    },
   },
-  computed: {
-  },
-  mounted () {
-    window.scrollTo(0, 0)
-    this.productSet()
+  computed: {},
+  mounted() {
+    window.scrollTo(0, 0);
+    this.productSet();
     Axios.get(`${process.env.VUE_APP_BACKEND}/api/category`, {
       headers: {
-        'token': this.$store.getters['auth/getToken']
-      }
-    }).then(res => this.category = res.data.data).catch(err => console.error(err))
+        token: this.$store.getters["auth/getToken"],
+      },
+    })
+      .then((res) => (this.category = res.data.data))
+      .catch((err) => console.error(err));
   },
   components: {
     Navbar,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
 
+<style src="../assets/css/style.css"></style>
 <style scoped>
-.image-cover {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.image-coupons {
+  height: 100% !important;
 }
-.col-lg-4 {
-  border-right: 1px solid #5e5e5e;
-}
-.col-lg-4 .head {
-  text-align: center;
-}
-.col-lg-4 .head p {
-  line-height: 0;
-}
-.col-lg-4 .content-coupons .coupons {
-  width: 100%;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
-  border-radius: 25px 25px 25px 25px;
-  margin-top: 10px;
-}
-.col-lg-4 .apply {
-  margin-top: 70px;
-  width: 335px;
-  height: 64px;
-  background: #6A4029;
-  border-radius: 20px;
-  color: #ffffff;
-}
-.col-lg-4 .information {
-  margin-top: 50px;
-  line-height: 0.7;
-}
-.col-lg-8 {
-  width: 100%;
-  height: 800px;
-}
-.col-lg-8 .navbar {
-  width: 100%;
-  height: 70px;
-}
-.col-lg-8 .menu .product {
-  width: 100%;
-  height: 830px;
-  padding: 40px;
-}
-.col-lg-8 .menu .product .row {
-  margin-left: 0;
-  height: 300px;
-}
-.col-lg-8 .menu .product .row .col-lg-3 {
-  position: relative;
-  width: 40px !important;
-  height: 220px;
-  margin-top: 30px;
-  border-radius: 40px 40px 40px 40px;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
-}
-.col-lg-8 .menu .product .row .col-lg-3 img {
-  object-fit: cover;
+.card-img-top {
   position: absolute;
+  top: -75px;
+  left: 50%;
+  margin-left: -75px;
   width: 150px;
   height: 150px;
-  border-radius: 75px 75px 75px 75px;
-  transform: translate(15%, -30%);
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
+  object-fit: cover;
+  border-radius: 100%;
 }
-.col-lg-8 .menu .product .row .col-lg-3 .card-body {
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-}
-.btnAdd{
-  width: 100%;
-  height: 70px;
-  background: #6A4029;
-  border-radius: 20px;
-  color: white;
+.card-product {
+  margin-top: 75px;
+  padding-top: 75px;
 }
 </style>
+<style scoped src="../assets/css/ownstyle_rzid.css"></style>

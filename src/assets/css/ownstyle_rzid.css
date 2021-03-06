@@ -1,0 +1,48 @@
+@font-face {
+  font-family: poppins;
+  src: url("../fonts/Poppins/Poppins-Regular.ttf");
+}
+
+.font-poppins {
+  font-family: poppins;
+}
+
+.radius-40 {
+  border-radius: 40px;
+}
+.radius-20 {
+  border-radius: 20px;
+}
+
+.bg-green {
+  background-color: rgb(136, 183, 136);
+}
+
+.bg-cream {
+  background-color: rgb(245, 195, 97);
+}
+
+.bg-browny-pink {
+  background-color: rgb(197, 147, 120);
+}
+
+.text-brown {
+  color: rgb(106, 64, 41);
+}
+.btn-brown {
+  background-color: rgb(106, 64, 41);
+  color: white;
+}
+.btn-brown:hover {
+  background-color: rgb(85, 49, 32);
+  color: white;
+}
+.active-bar {
+  border-bottom: solid rgb(106, 64, 41);
+}
+.image-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+}
