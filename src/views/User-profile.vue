@@ -26,7 +26,7 @@
                 </div>
                 <div id="select">
                   <input
-                    @input="setImage"
+                    @change="setImage"
                     id="fileImage"
                     type="file"
                     hidden
@@ -46,9 +46,9 @@
                     Remove Photo
                   </button>
                 </div>
-                <div class="mt-5">
+                <!-- <div class="mt-5">
                   <button class="btn-edit">Edit Password</button>
-                </div>
+                </div> -->
                 <div class="changes mt-5">Do you want to save the change?</div>
                 <div id="save" class="mt-5">
                   <button class="btn-save" @click="save()">Save Change</button>
@@ -101,10 +101,11 @@
                     />
                   </div>
                   <div class="col-md-4">
-                    <p>Birthdate</p>
+                    <p for="birthday">Birthdate</p>
                     <input
                       class="setLine border-bottom border-dark form-control"
                       type="date"
+                      id="birthday"
                       v-model="userData.birthdate"
                     />
                   </div>
@@ -172,26 +173,14 @@ export default {
     save() {
       console.log(this.userData);
       let data = new FormData();
-      this.userData.phone ? data.append("phone", this.userData.phone) : "";
-      this.userData.gender ? data.append("gender", this.userData.gender) : "";
-      this.userData.birthdate
-        ? data.append("birthdate", this.userData.birthdate)
-        : "";
-      this.userData.display_name
-        ? data.append("display_name", this.userData.display_name)
-        : "";
-      this.userData.first_name
-        ? data.append("first_name", this.userData.first_name)
-        : "";
-      this.userData.last_name
-        ? data.append("last_name", this.userData.last_name)
-        : "";
-      this.userData.address
-        ? data.append("address", this.userData.address)
-        : "";
-      if (this.image) {
-        data.append("image", this.image);
-      }
+      data.append("phone", this.userData.phone)
+      data.append("gender", this.userData.gender)
+      data.append("birthdate", this.userData.birthdate)
+      data.append("display_name", this.userData.display_name)
+      data.append("first_name", this.userData.first_name)
+      data.append("last_name", this.userData.last_name)
+      data.append("address", this.userData.address)
+      data.append("image", this.userData.image)
       Axios.patch(
         `${process.env.VUE_APP_BACKEND}/api/user/${this.userData.id}`,
         data,
@@ -241,7 +230,7 @@ export default {
       });
     },
     setImage(e) {
-      this.image = "";
+      // this.userData.image = this.userData.image;
       this.imgUrl = "";
       const file = e.target.files[0];
       if (file["type"] !== "image/jpeg" && file["type"] !== "image/png") {
@@ -278,8 +267,8 @@ export default {
 </script>
 
 <style scoped>
-input::-webkit-inner-spin-button,
-input::-webkit-calendar-picker-indicator {
+input::-webkit-inner-spin-button{
+/* input::-webkit-calendar-picker-indicator { */
   display: none;
   -webkit-appearance: none;
 }
