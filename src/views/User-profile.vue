@@ -26,7 +26,7 @@
                 </div>
                 <div id="select">
                   <input
-                    @change="setImage"
+                    @input="setImage"
                     id="fileImage"
                     type="file"
                     hidden
@@ -173,14 +173,14 @@ export default {
     save() {
       console.log(this.userData);
       let data = new FormData();
-      data.append("phone", this.userData.phone)
-      data.append("gender", this.userData.gender)
-      data.append("birthdate", this.userData.birthdate)
-      data.append("display_name", this.userData.display_name)
-      data.append("first_name", this.userData.first_name)
-      data.append("last_name", this.userData.last_name)
-      data.append("address", this.userData.address)
-      data.append("image", this.userData.image)
+      data.append("phone", this.userData.phone);
+      data.append("gender", this.userData.gender);
+      data.append("birthdate", this.userData.birthdate);
+      data.append("display_name", this.userData.display_name);
+      data.append("first_name", this.userData.first_name);
+      data.append("last_name", this.userData.last_name);
+      data.append("address", this.userData.address);
+      data.append("image", this.image);
       Axios.patch(
         `${process.env.VUE_APP_BACKEND}/api/user/${this.userData.id}`,
         data,
@@ -267,8 +267,8 @@ export default {
 </script>
 
 <style scoped>
-input::-webkit-inner-spin-button{
-/* input::-webkit-calendar-picker-indicator { */
+input::-webkit-inner-spin-button {
+  /* input::-webkit-calendar-picker-indicator { */
   display: none;
   -webkit-appearance: none;
 }
