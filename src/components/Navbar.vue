@@ -17,7 +17,8 @@
             >History</router-link
           >
         </div>
-        <form class="d-flex" v-if="getToken" @submit.prevent="">
+        <div class="right-content">
+        <form class="d-flex src" v-if="getToken" @submit.prevent="">
           <div class="row">
             <div class="col-8">
               <div class="input-group bg-gray">
@@ -112,7 +113,7 @@
               </template>
               <b-dropdown-item @click="$router.push('/user_profile')"
                 >Profile</b-dropdown-item
-              >
+              >''
               <b-dropdown-item @click="toLogOut()">Logout</b-dropdown-item>
             </b-dropdown>
           </div>
@@ -121,7 +122,27 @@
           <router-link class="btn login" to="/login">Login</router-link>
           <router-link class="btn signup" to="/register">Signup</router-link>
         </form>
+        </div>
+        <div @click="openRes()" class="button-toggler btn border">
+          <b-icon icon="menu-up" font-scale="2"></b-icon>
+        </div>
       </div>
+        <div v-if="resNav === true" class="navigation-res">
+          <div>
+              <div class="res-content">
+                <router-link to="/">Home</router-link>
+              </div>
+              <div class="res-content">
+                <router-link to="/product">Product</router-link>
+              </div>
+              <div class="res-content">
+                <router-link to="/cart">Your Cart</router-link>
+              </div>
+              <div class="res-content">
+                <router-link to="/history">History</router-link>
+              </div>
+          </div>
+        </div>
     </nav>
   </div>
 </template>
@@ -137,7 +158,8 @@ export default {
       searchVal: '',
       searching: false,
       isLoading: false,
-      searchData: []
+      searchData: [],
+      resNav: false
     }
   },
   computed: {
@@ -179,6 +201,9 @@ export default {
       this.searching = false
       this.searchVal = ''
       this.isLoading = true
+    },
+    openRes () {
+      this.resNav = !this.resNav
     }
   },
   mounted () {
@@ -263,5 +288,30 @@ textarea:focus {
   border-radius: 25px 25px 25px 25px;
   border: none;
   background: #ffba33 !important;
+}
+.button-toggler{
+  display: none;
+}
+.navigation-res{
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .navigation{  
+    display: none;
+  }
+  .right-content{
+    display: none;
+  }
+  .button-toggler{
+    display: flex;
+  }
+  .navigation-res{
+    display: flex;
+    line-height: 3;
+    width: 100%;
+    height: calc(100vh - 91px);
+    background: white;
+  }
 }
 </style>
