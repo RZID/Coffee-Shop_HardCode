@@ -141,7 +141,7 @@
         </div>
         <div class="col">
           <div class="py-3">
-            <div class="row  overflow-x">
+            <div class="row overflow-x">
               <div
                 class="col text-center"
                 v-for="(element, i) in category"
@@ -185,9 +185,7 @@
                     <div class="card shadow border-0 radius-40 card-product">
                       <img
                         :src="getImage(element.image)"
-                        :onerror="
-                          'this.onerror=null;this.src=`/image/default.jpg`'
-                        "
+                        :onerror="'this.onerror=null;this.src=`/image/default.jpg`'"
                         class="image-cover image-product shadow card-img-top"
                       />
                       <div class="card-body">
@@ -262,7 +260,7 @@
         </div>
       </div>
     </div>
-    <div class="d-none d-md-block">
+    <div class="d-block">
       <Footer />
     </div>
   </div>
