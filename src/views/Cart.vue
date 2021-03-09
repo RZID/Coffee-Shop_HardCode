@@ -27,8 +27,8 @@
                       <img
                         :style="
                           'background-image:url(' +
-                          getImage(element.image) +
-                          '),url(/image/default.jpg)'
+                            getImage(element.image) +
+                            '),url(/image/default.jpg)'
                         "
                         alt=""
                       />
@@ -221,12 +221,12 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { mapActions, mapGetters } from 'vuex'
-import currency from '../helper/currency'
-import Alert from '../helper/swal'
-import Axios from 'axios'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { mapActions, mapGetters } from "vuex";
+import currency from "../helper/currency";
+import Alert from "../helper/swal";
+import Axios from "axios";
 
 export default {
   mixins: [currency, Alert],
@@ -234,77 +234,88 @@ export default {
     return {
       edit: true,
       detailDeliv: {
-        addr1: '',
-        addr2: '',
-        phone: '',
-        payment: null
-      }
-    }
+        addr1: "",
+        addr2: "",
+        phone: "",
+        payment: null,
+      },
+    };
   },
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   computed: {
     ...mapGetters({
-      getCart: 'cart/getCart'
-    })
+      getCart: "cart/getCart",
+    }),
   },
   methods: {
     ...mapActions({
-      deleteCartItem: 'cart/deleteItemCart',
-      removeCart: 'cart/removeCart',
-      addHistory: 'history/addHistory'
+      deleteCartItem: "cart/deleteItemCart",
+      removeCart: "cart/removeCart",
+      addHistory: "history/addHistory",
     }),
-    send () {
-      const detail = this.detailDeliv
+    send() {
+      const detail = this.detailDeliv;
       if (!detail.addr1 || !detail.addr2 || !detail.phone || !detail.payment) {
-        this.alertDanger('Please fill all input!')
+        this.alertDanger("Please fill all input!");
       } else {
-        const data = this.getCart.map(el => {
+        const data = this.getCart.map((el) => {
           return {
             id_product: el.id,
             qty: el.qty,
-            delivery_detail: 'Order in process',
-            status: '0',
-            id_user: this.$store.getters['auth/getUserData'].uid,
+            delivery_detail: "Order in process",
+            status: "0",
+            id_user: this.$store.getters["auth/getUserData"].uid,
             address: `${detail.addr1} ${detail.addr2}`,
             phone: detail.phone,
-            payment: detail.payment
-          }
-        })
-        this.addHistory(data).then(() => {
-          this.removeCart()
-          this.toastSuccess('OK!, Your order will be process!')
-        }).catch(err => console.error(err))
+            payment: detail.payment,
+          };
+        });
+        this.addHistory(data)
+          .then(() => {
+            this.removeCart();
+            this.toastSuccess("OK!, Your order will be process!");
+          })
+          .catch((err) => console.error(err));
       }
     },
-    getImage (img) {
-      return `${process.env.VUE_APP_BACKEND}/images/${img}`
+    getImage(img) {
+      return `${process.env.VUE_APP_BACKEND}/images/${img}`;
     },
-    editAddr () {
-      this.edit = !this.edit
+    editAddr() {
+      this.edit = !this.edit;
     },
-    deleteCart (id) {
+    deleteCart(id) {
       this.alertQuestion(`Delete this item from cart?`).then(() => {
-        this.deleteCartItem(id)
-      })
-    }
+        this.deleteCartItem(id);
+      });
+    },
   },
-  mounted () {
-    window.scrollTo(0, 0)
-    Axios.get(`${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters['auth/getUserData'].uid}`, {
-      headers: {
-        'token': this.$store.getters['auth/getToken']
+  mounted() {
+    window.scrollTo(0, 0);
+    Axios.get(
+      `${process.env.VUE_APP_BACKEND}/api/user/${this.$store.getters["auth/getUserData"].uid}`,
+      {
+        headers: {
+          token: this.$store.getters["auth/getToken"],
+        },
       }
-    }).then((res) => {
-      const dataUser = res.data.data[0]
-      this.detailDeliv.addr1 = `${dataUser.first_name ? dataUser.first_name + ' ' : ''}${dataUser.last_name ? dataUser.last_name + ' ' : ''}${dataUser.display_name ? '(' + dataUser.display_name + ')' : ''}'s House`
-      this.detailDeliv.addr2 = dataUser.address
-      this.detailDeliv.phone = dataUser.phone
-    }).catch(err => console.error(err))
-  }
-}
+    )
+      .then((res) => {
+        const dataUser = res.data.data[0];
+        this.detailDeliv.addr1 = `${
+          dataUser.first_name ? dataUser.first_name + " " : ""
+        }${dataUser.last_name ? dataUser.last_name + " " : ""}${
+          dataUser.display_name ? "(" + dataUser.display_name + ")" : ""
+        }'s House`;
+        this.detailDeliv.addr2 = dataUser.address;
+        this.detailDeliv.phone = dataUser.phone;
+      })
+      .catch((err) => console.error(err));
+  },
+};
 </script>
 
 <style scoped>
