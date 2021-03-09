@@ -5,19 +5,19 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="picture">
-          <img
-            v-if="dataProduct.image"
-            :src="getImage(dataProduct.image)"
-            onerror="this.onerror=null;this.src='/image/default.jpg'"
-            :alt="'Image of ' + dataProduct.name"
-          />
-          <button
-            v-if="$store.getters['auth/getUserData']['access'] == 0"
-            class="trash"
-            @click="deleteProduct()"
-          >
-            <b-icon icon="trash"></b-icon>
-          </button>
+            <img
+              v-if="dataProduct.image"
+              :src="getImage(dataProduct.image)"
+              onerror="this.onerror=null;this.src='/image/default.jpg'"
+              :alt="'Image of ' + dataProduct.name"
+            />
+            <button
+              v-if="$store.getters['auth/getUserData']['access'] == 0"
+              class="trash"
+              @click="deleteProduct()"
+            >
+              <b-icon icon="trash"></b-icon>
+            </button>
           </div>
         </div>
         <div class="col-lg-7">
@@ -70,10 +70,15 @@
         </div>
       </div>
     </div>
-    <div class="container sec-con">
+    <div class="container sec-con mb-5">
       <div class="pb-3">
         <div class="thisCheckout px-4">
-          <img :src="getImage(dataProduct.image)" alt="" />
+          <img
+            v-if="dataProduct.image"
+            :src="getImage(dataProduct.image)"
+            onerror="this.onerror=null;this.src='/image/default.jpg'"
+            alt=""
+          />
           <div class="row">
             <div class="col-lg-6 d-flex m-0">
               <span class="align-self-center">
@@ -94,7 +99,9 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <div>
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -204,7 +211,7 @@ export default {
 .bg-choco {
   background: chocolate;
 }
-.col-lg-5{
+.col-lg-5 {
   position: relative;
 }
 .col-lg-5 .trash {
@@ -219,7 +226,7 @@ export default {
   bottom: 5%;
   right: 20%;
 }
-.col-lg-5 .picture{
+.col-lg-5 .picture {
   position: relative;
   display: flex;
   justify-content: center;
@@ -370,8 +377,8 @@ export default {
   border-radius: 25px;
 }
 
-@media (max-width: 992px){
-  .col-lg-5 .trash{
+@media (max-width: 992px) {
+  .col-lg-5 .trash {
     bottom: 0;
     right: 0;
   }

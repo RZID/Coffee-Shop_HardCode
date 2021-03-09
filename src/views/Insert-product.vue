@@ -188,6 +188,7 @@ export default {
         !this.form.price ||
         !this.form.desc ||
         !this.form.productSize ||
+        !this.form.image ||
         !this.form.deliv
       ) {
         this.alertDanger("You must fill all of input!");
@@ -369,8 +370,8 @@ export default {
   font-size: 18px;
 }
 
-@media (max-width: 992px){
-  .col-lg-7{
+@media (max-width: 992px) {
+  .col-lg-7 {
     border: none;
   }
 }

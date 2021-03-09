@@ -130,19 +130,132 @@
           <b-icon icon="menu-up" font-scale="2"></b-icon>
         </div>
       </div>
-      <div v-if="resNav === true" class="navigation-res">
-        <div>
-          <div class="res-content">
-            <router-link to="/">Home</router-link>
+      <div v-if="resNav === true" class="navigation-res pr-5 text-right">
+        <div class="square w-100">
+          <div class="square1 w-75">
+            <form v-if="getToken" @submit.prevent="">
+              <div class="row w-100">
+                <div class="col-lg-8">
+                  <div class="input-group bg-gray">
+                    <span class="d-flex" v-if="!searching">
+                      <i class="fa fa-search align-self-center"></i>
+                    </span>
+                    <span class="d-flex" v-else>
+                      <b-link
+                        class="text-dark align-self-center"
+                        @click="closeSearch()"
+                      >
+                        <i class="fa fa-times"></i>
+                      </b-link>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control search"
+                      placeholder="Search"
+                      v-model="searchVal"
+                      @input="search()"
+                    />
+                  </div>
+                  <div
+                    class="position-absolute rounded bg-white"
+                    v-if="searching"
+                  >
+                    <div class="for-search maxHeight">
+                      <div v-if="isLoading" class="text-center py-3">
+                        <div class="spinner-border" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <h6>Searching...</h6>
+                      </div>
+                      <div
+                        class="px-2"
+                        v-else
+                        v-for="(element, i) in searchData"
+                        :key="i"
+                      >
+                        <b-link
+                          class="text-dark text-decoration-none"
+                          @click="
+                            $router
+                              .push('/detail_product/' + element.id)
+                              .catch(() => {})
+                          "
+                        >
+                          <div class="">
+                            <div class="border-bottom" style="min-height: 75px">
+                              <div class="row no-gutters d-flex py-2 h-100">
+                                <div class="col-4 align-self-center">
+                                  <div
+                                    style="min-height: 75px"
+                                    class="image"
+                                    :style="
+                                      'background-image:url(' +
+                                        getImage(element.image) +
+                                        '), url(/image/default.jpg) !important'
+                                    "
+                                    alt=""
+                                    srcset=""
+                                  ></div>
+                                </div>
+                                <div class="ml-2 col align-self-center">
+                                  {{
+                                    "(" + element.size + ") - " + element.name
+                                  }}
+                                  <p class="reg-font m-0">
+                                    IDR {{ toRupiah(element.price) }}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </b-link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-none d-lg-block">
+                  <img src="/icons/chat.svg" />
+                </div>
+                <b-dropdown
+                  variant="link"
+                  toggle-class="text-decoration-none"
+                  no-caret
+                  class="position-static"
+                >
+                  <template #button-content>
+                    <img
+                      class="rounded-c  d-none d-lg-block"
+                      src="/image/default.png"
+                      height="30px"
+                      alt=""
+                      srcset=""
+                    />
+                  </template>
+                  <b-dropdown-item @click="$router.push('/user_profile')"
+                    >Profile</b-dropdown-item
+                  >''
+                  <b-dropdown-item @click="toLogOut()">Logout</b-dropdown-item>
+                </b-dropdown>
+              </div>
+            </form>
+            <form class="d-flex" v-else>
+              <router-link class="btn login" to="/login">Login</router-link>
+              <router-link class="btn signup" to="/register"
+                >Signup</router-link
+              >
+            </form>
+          </div>
+          <div class="res-content mt-5">
+            <router-link to="/" class="text-brown">Home</router-link>
           </div>
           <div class="res-content">
-            <router-link to="/product">Product</router-link>
+            <router-link to="/product" class="text-brown">Product</router-link>
           </div>
           <div class="res-content">
-            <router-link to="/cart">Your Cart</router-link>
+            <router-link to="/cart" class="text-brown">Your Cart</router-link>
           </div>
           <div class="res-content">
-            <router-link to="/history">History</router-link>
+            <router-link to="/history" class="text-brown">History</router-link>
           </div>
         </div>
       </div>
@@ -227,6 +340,9 @@ export default {
 .reg-font {
   font-family: "poppins-reg" !important;
 }
+.text-brown {
+  color: #6a4029 !important;
+}
 .image {
   background-position: center;
   background-size: cover;
@@ -301,6 +417,13 @@ textarea:focus {
 }
 .navigation-res {
   display: none;
+}
+.square {
+  width: 100%;
+}
+.square1 {
+  position: absolute;
+  right: 50px;
 }
 
 @media (max-width: 992px) {

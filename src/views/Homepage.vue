@@ -7,6 +7,7 @@
         <h1>Coffee and Good Meals</h1>
         <p class="more-information">
           We provide high quality beans, good taste, and healthy meals made by
+          <br />
           love just for you, Start your day with us for a bigger smile!
         </p>
         <button class="started">Get Started</button>
@@ -24,35 +25,70 @@
         <div class="store">
           <b-icon class="pi" icon="geo-alt-fill" />
           <div class="text">
-          <h4>30+</h4>
-          <p>Stores</p>
+            <h4>30+</h4>
+            <p>Stores</p>
           </div>
         </div>
         <div class="customer">
           <b-icon class="pi" icon="heart" />
           <div class="text">
-          <h4>800+</h4>
-          <p>Customers</p>
+            <h4>800+</h4>
+            <p>Customers</p>
           </div>
         </div>
       </div>
       <div class="row content">
         <div class="map col-lg-6">
           <div class="img">
-            <img src="../assets/TM.png" alt="Team Work"/>
+            <img src="../assets/TM.png" class="w-100" alt="Team Work" />
           </div>
         </div>
         <div class="parag col-lg-6 p-4">
-          <br>
+          <br />
           <div class="head mt-5">
             <h2>We Provide Good Coffee and Healthy Meals</h2>
           </div>
           <div class="paragraf mt-4">
-            <p>You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
-            <p><b-icon icon="check2" class="rounded-circle bg-success p-1" variant="light" font-scale="1.5"/> High quality beans</p>
-            <p><b-icon icon="check2" class="rounded-circle bg-success p-1" variant="light" font-scale="1.5"/> Healthy meals, you can request the ingredients</p>
-            <p><b-icon icon="check2" class="rounded-circle bg-success p-1" variant="light" font-scale="1.5"/> Chat with pur staff to get better experience for ordering</p>
-            <p><b-icon icon="check2" class="rounded-circle bg-success p-1" variant="light" font-scale="1.5"/> Free member card with a minimum purchase of IDR 200.000</p>
+            <p>
+              You can explore the menu that we provide with fun and have their
+              own taste and make your day better.
+            </p>
+            <p>
+              <b-icon
+                icon="check2"
+                class="rounded-circle bg-success p-1"
+                variant="light"
+                font-scale="1.5"
+              />
+              High quality beans
+            </p>
+            <p>
+              <b-icon
+                icon="check2"
+                class="rounded-circle bg-success p-1"
+                variant="light"
+                font-scale="1.5"
+              />
+              Healthy meals, you can request the ingredients
+            </p>
+            <p>
+              <b-icon
+                icon="check2"
+                class="rounded-circle bg-success p-1"
+                variant="light"
+                font-scale="1.5"
+              />
+              Chat with pur staff to get better experience for ordering
+            </p>
+            <p>
+              <b-icon
+                icon="check2"
+                class="rounded-circle bg-success p-1"
+                variant="light"
+                font-scale="1.5"
+              />
+              Free member card with a minimum purchase of IDR 200.000
+            </p>
           </div>
         </div>
       </div>
@@ -71,7 +107,7 @@
           <div class="col-lg-4 first-fav">
             <div class="box">
               <div class="product-image">
-                <img src="../assets/TM.png" alt="">
+                <img src="../assets/TM.png" alt="" />
               </div>
               <div class="information-product">
                 <div class="product-name">
@@ -79,16 +115,28 @@
                 </div>
                 <div class="product-comp">
                   <div class="comp">
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Hazelnut Syrup</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Vanilla whipped Cream </p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Ice / Hot</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Sliced Banana on Top</p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Hazelnut Syrup
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Vanilla whipped Cream
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Ice / Hot
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Sliced Banana on Top
+                    </p>
                   </div>
                 </div>
                 <div class="next-action">
                   <div class="tools">
-                  <h3>IDR 25.000</h3>
-                  <button>Order Now</button>
+                    <h3>IDR 25.000</h3>
+                    <button>Order Now</button>
                   </div>
                 </div>
               </div>
@@ -97,7 +145,7 @@
           <div class="col-lg-4 second-fav">
             <div class="box">
               <div class="product-image">
-                <img src="../assets/TM.png" alt="">
+                <img src="../assets/TM.png" alt="" />
               </div>
               <div class="information-product">
                 <div class="product-name">
@@ -105,17 +153,32 @@
                 </div>
                 <div class="product-comp">
                   <div class="comp">
-                  <p><b-icon icon="check2" style="color:green !important;"/>  1Shot of Coffee</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Vanilla whipped Cream </p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Chocolate Biscuits</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Strawberry Syrup</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Sliced strawberry on Top</p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      1Shot of Coffee
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Vanilla whipped Cream
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Chocolate Biscuits
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Strawberry Syrup
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Sliced strawberry on Top
+                    </p>
                   </div>
                 </div>
                 <div class="next-action">
                   <div class="tools">
-                  <h3>IDR 30.000</h3>
-                  <button>Order Now</button>
+                    <h3>IDR 30.000</h3>
+                    <button>Order Now</button>
                   </div>
                 </div>
               </div>
@@ -124,7 +187,7 @@
           <div class="col-lg-4 third-fav">
             <div class="box">
               <div class="product-image">
-                <img src="../assets/TM.png" alt="">
+                <img src="../assets/TM.png" alt="" />
               </div>
               <div class="information-product">
                 <div class="product-name">
@@ -132,18 +195,36 @@
                 </div>
                 <div class="product-comp">
                   <div class="comp">
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Wings</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Drum Sticks</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Mayonaise and Lemon</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Hot Fried</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Secret Recipe</p>
-                  <p><b-icon icon="check2" style="color:green !important;"/>  Buy 1 Get 1 only for Dine in</p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Wings
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Drum Sticks
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Mayonaise and Lemon
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Hot Fried
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Secret Recipe
+                    </p>
+                    <p>
+                      <b-icon icon="check2" style="color:green !important;" />
+                      Buy 1 Get 1 only for Dine in
+                    </p>
                   </div>
                 </div>
                 <div class="next-action">
                   <div class="tools">
-                  <h3>IDR 40.000</h3>
-                  <button>Order Now</button>
+                    <h3>IDR 40.000</h3>
+                    <button>Order Now</button>
                   </div>
                 </div>
               </div>
@@ -157,18 +238,18 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
-  mounted () {
-    window.scrollTo(0, 0)
-  }
-}
+  mounted() {
+    window.scrollTo(0, 0);
+  },
+};
 </script>
 
 <style scoped>
@@ -183,7 +264,7 @@ export default {
 }
 .more-information {
   color: #ffffff;
-  width: 400px;
+  width: 100%;
 }
 .started {
   background: #ffba33 !important;
@@ -221,7 +302,7 @@ export default {
   height: 50px;
   border-radius: 25px 25px 25px 25px;
 }
-.fyi .staff .text{
+.fyi .staff .text {
   margin-left: 25px;
   padding-top: 20px;
 }
@@ -241,7 +322,7 @@ export default {
   height: 50px;
   border-radius: 25px 25px 25px 25px;
 }
-.fyi .store .text{
+.fyi .store .text {
   margin-left: 25px;
   padding-top: 20px;
 }
@@ -259,7 +340,7 @@ export default {
   height: 50px;
   border-radius: 25px 25px 25px 25px;
 }
-.fyi .customer .text{
+.fyi .customer .text {
   margin-left: 25px;
   padding-top: 20px;
 }
@@ -277,67 +358,67 @@ export default {
 .sec-container .head {
   text-align: center;
 }
-.first-fav{
+.first-fav {
   width: 100%;
   height: 600px;
   padding: 50px;
 }
-.second-fav{
+.second-fav {
   width: 100%;
   height: 600px;
   padding: 50px;
 }
-.third-fav{
+.third-fav {
   width: 100%;
   height: 600px;
   padding: 50px;
 }
-.box{
+.box {
   width: 100%;
   height: 100%;
-  border: 1px solid #5E5E5E;
+  border: 1px solid #5e5e5e;
   border-radius: 15px;
   background: white;
 }
-.box:hover{
+.box:hover {
   border: 2px solid black;
 }
-.box .product-image{
+.box .product-image {
   display: flex;
   justify-content: center;
-  transform: translateY(-50%)
+  transform: translateY(-50%);
 }
-.box .product-image img{
+.box .product-image img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
 }
-.box .information-product .product-name{
+.box .information-product .product-name {
   display: flex;
   justify-content: center;
   transform: translateY(-100%);
 }
-.box .information-product .product-comp{
+.box .information-product .product-comp {
   margin-left: 30px;
   line-height: 1;
 }
-.box .next-action{
+.box .next-action {
   display: flex;
   justify-content: center;
 }
-.box .next-action .tools{
+.box .next-action .tools {
   position: absolute;
   bottom: 80px;
 }
-.box .next-action .tools button{
+.box .next-action .tools button {
   width: 100%;
   height: 40px;
   border-radius: 25px;
   border: 2px solid #ffba33;
   background: transparent;
 }
-.box .next-action .tools button:hover{
+.box .next-action .tools button:hover {
   background: #ffba33;
   height: 50px;
   transition: 0.4s;
