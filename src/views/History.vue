@@ -30,7 +30,7 @@
                         :src="getImage(element.image)"
                         onerror="this.onerror=null;this.src='/image/default.jpg'"
                         alt=""
-                        class="w-100 h-100 object-cover"
+                        class="imag object-cover"
                       />
                     </div>
                     <div class="col d-flex">
@@ -163,5 +163,12 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+.card-body{
+  height: 150px;
+}
+.imag{
+  width: 100px;
+  height: 100px;
 }
 </style>
