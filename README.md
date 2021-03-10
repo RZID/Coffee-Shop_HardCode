@@ -1,10 +1,27 @@
 # COFFEE SHOP HARD CORE (FRONTEND)
 
 ## About This Project
+
 This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, bootstrap, and etc.
 
+## Interface
+
+#### Desktop
+
+![Desktop_Mode](./assets_image/pc.png)
+
+#### Tablet
+
+![Tab_Mode](./assets_image/tablet.png)
+
+#### Mobile
+
+![Mobile_Mode](./assets_image/mobile.png)
+
 ---
+
 ## How To Use
+
 1. Clone this repository
 2. Clone backend repository and follow the steps
 3. Run `npm install`
@@ -12,7 +29,9 @@ This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, b
 5. Run frontend server `npm run serve`
 
 ---
+
 ## Features
+
 1. Sign Up
 2. Login
 3. CRUD
@@ -23,4 +42,5 @@ This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, b
 8. OTP
 
 ---
+
 ## The Interface
