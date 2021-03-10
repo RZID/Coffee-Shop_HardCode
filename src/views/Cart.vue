@@ -99,7 +99,7 @@
                 </div>
                 <hr />
                 <div class="d-flex pb-2">
-                  <div class="col-lg-4 col-md-3">TOTAL</div>
+                  <div style="height: 40px;" class="col-lg-4 col-md-3">TOTAL</div>
                   <div class="col-lg-8 text-right">
                     IDR
                     {{
@@ -126,13 +126,13 @@
             <div class="header-adress">
               <h4>Address</h4>
               <button @click="editAddr()">
-                <span v-if="edit">Edit</span><span v-else>Apply</span>
+                <span>Save</span>
+                <!-- <span v-else>Apply</span> -->
               </button>
             </div>
             <div class="adress-card">
               <textarea
                 class="border-0 form-control"
-                :readonly="edit ? true : false"
                 placeholder="Recipent *"
                 v-model="detailDeliv.addr1"
               >
@@ -140,7 +140,6 @@
               <hr />
               <textarea
                 class="border-0 form-control"
-                :readonly="edit ? true : false"
                 placeholder="Address Detail *"
                 v-model="detailDeliv.addr2"
               >
@@ -151,7 +150,6 @@
                 placeholder="Phone *"
                 class="form-control border-0"
                 v-model="detailDeliv.phone"
-                :readonly="edit ? true : false"
               />
             </div>
             <h4 class="method-header">Payment method</h4>
@@ -380,7 +378,7 @@ textarea:focus {
 }
 .cart .product {
   width: 100%;
-  height: 230px;
+  height: 250px;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -410,7 +408,7 @@ textarea:focus {
 }
 .payment .payment-methods {
   background: white;
-  height: 180px;
+  height: 210px;
   line-height: 2;
   padding: 10px 10px 0 10px;
   border-radius: 20px;
