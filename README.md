@@ -29,10 +29,6 @@ This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, b
 
 ---
 
-## The Interface
-
-Demo on : [Here](http://54.84.168.198:44823/)
-
 #### Desktop
 
 ![Desktop_Mode](./assets_image/pc.png)
@@ -44,6 +40,11 @@ Demo on : [Here](http://54.84.168.198:44823/)
 #### Mobile
 
 ![Mobile_Mode](./assets_image/mobile.png)
+
+
+## The Interface
+
+Demo on : [Here](http://54.84.168.198:44823/)
 
 ## For Backend
 
