@@ -33,9 +33,6 @@ This is a Point of Sales project for coffee shop. It was build with VUE, VUEX, b
 
 Demo on : [Here](http://54.84.168.198:44823/)
 
-## For Backend
-
-You can see at [backend](https://github.com/RZID/Backend-CoffeeShop_HardCode.git)
 #### Desktop
 
 ![Desktop_Mode](./assets_image/pc.png)
@@ -47,3 +44,7 @@ You can see at [backend](https://github.com/RZID/Backend-CoffeeShop_HardCode.git
 #### Mobile
 
 ![Mobile_Mode](./assets_image/mobile.png)
+
+## For Backend
+
+You can see at [backend](https://github.com/RZID/Backend-CoffeeShop_HardCode.git)
